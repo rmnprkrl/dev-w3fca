@@ -1,3 +1,8 @@
+.tns-fadeIn,
+.tns-fadeOut {
+	transition: none !important;
+}
+
 .slider {
 	padding-top: 6rem;
 	height: 30vh;
@@ -130,9 +135,12 @@
 	}
 
 	img {
-		box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.5);
 		max-width: none;
 		width: 100%;
+
+		&.loaded.tns-complete {
+			box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.5);
+		}
 	}
 }
 
