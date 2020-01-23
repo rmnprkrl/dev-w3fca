@@ -4,6 +4,21 @@
 	padding-bottom: 1.5rem;
 	margin-bottom: 0;
 	border-radius: 0;
+
+	@media (min-width: 768px) {
+		position: fixed;
+		z-index: 99999;
+		width: 100%;
+		height: 90px;
+		top: 0;
+		transition: top 0.4s ease;
+	}
+
+	.navbar-hidden & {
+		@media (min-width: 768px) {
+			top: -100px;
+		}
+	}
 }
 
 .navbar-brand {
@@ -153,6 +168,10 @@ code {
 	border-radius: 4px;
 }
 
+.text-black {
+	color: $black;
+}
+
 .abi-textarea {
 	color: black;
 }
@@ -215,4 +234,18 @@ code {
 	border: none;
 	background: black;
 	color: white;
+}
+
+a.back-to-top.sticky-viewport-bottom.position-fixed {
+	display: none !important;
+}
+
+#mc_embed_signup_scroll {
+	.input-group-prepend {
+		height: 58px;
+
+		span {
+			height: 58px;
+		}
+	}
 }

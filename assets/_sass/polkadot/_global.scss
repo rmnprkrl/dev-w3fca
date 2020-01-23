@@ -1,0 +1,18 @@
+body {
+  color: $black;
+  background-color: $primary;
+}
+
+a.back-to-top.sticky-viewport-bottom.position-fixed {
+  display: none !important;
+}
+
+#mc_embed_signup_scroll {
+  .input-group-prepend {
+    height: 58px;
+
+    span {
+      height: 58px;
+    }
+  }
+}

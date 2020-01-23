@@ -1,121 +1,111 @@
 .navbar-light .navbar-nav .nav-link {
-	color: $black;
+  color: $black;
 
-	&:hover {
-		color: $black;
-	}
+  &:hover {
+    color: $black;
+  }
 }
 
 @media (min-width: 992px) {
-	.nav-link.h5 {
-		padding: 1rem 1rem 0;
-	}
+  .nav-link.h5 {
+    padding: 1rem 1rem 0;
+  }
 }
 .navbar a {
-	font-weight: 400;
+  font-weight: $font-weight-regular;
 }
 
 .navbar {
-	&--primary {
-		border-bottom: solid 1px $white;
-		transition: border 0.2s linear;
+  &--primary {
+    border-bottom: solid 1px $white;
+    transition: border 0.2s linear;
 
-		body.navbar-fixed-top & {
-			position: fixed;
-			top: 0;
-			right: 0;
-			left: 0;
-			z-index: 1030;
-			border-bottom: solid 1px $gray;
-		}
+    .logo {
+      max-height: 35px;
+      max-width: none;
+    }
 
-		@media (min-width: 768px) {
-			position: fixed;
-			z-index: 99999;
-			width: 100%;
-			height: 90px;
-			top: 0;
-			transition: top 0.4s ease;
-		}
+    body.navbar-fixed-top & {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1030;
+      border-bottom: solid 1px $gray;
+    }
 
-		.navbar-hidden & {
-			@media (min-width: 768px) {
-				top: -100px;
-			}
-		}
+    a.nav-link {
+      font-weight: $font-weight-regular;
+      position: relative;
 
-		a.nav-link {
-			font-weight: 600 !important;
-			position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        left: 1.125rem;
+        bottom: 28px;
+        background: $primary;
+        opacity: 0;
+        border-radius: 50%;
+      }
 
-			&:after {
-				content: "";
-				position: absolute;
-				width: 4px;
-				height: 4px;
-				left: 1.125rem;
-				bottom: 28px;
-				background: $primary;
-				opacity: 0;
-				border-radius: 50%;
-			}
+      &:hover:after {
+        opacity: 1;
+        animation: underdot-navlink 0.28s linear forwards,
+          opacity 0.28s linear forwards;
+      }
+    }
 
-			&:hover:after {
-				opacity: 1;
-				animation: underdot-navlink 0.28s linear forwards,
-					opacity 0.28s linear forwards;
-			}
-		}
+    .nav-item:nth-child(3) a:hover:after {
+      animation-duration: 0.19s;
+    }
 
-		.nav-item:nth-child(3) a:hover:after {
-			animation-duration: 0.19s;
-		}
+    .nav-item:nth-child(4) a:hover:after {
+      animation-duration: 0.17s;
+    }
 
-		.nav-item:nth-child(4) a:hover:after {
-			animation-duration: 0.17s;
-		}
+    .nav-item:last-child a:hover:after {
+      animation: underdot-navlink-last 0.32s linear forwards,
+        opacity 0.32s linear forwards;
+    }
+  }
 
-		.nav-item:last-child a:hover:after {
-			animation: underdot-navlink-last 0.32s linear forwards,
-				opacity 0.32s linear forwards;
-		}
-	}
-
-	&--secondary {
-		body.navbar-fixed-top & {
-			height: 50 + 70px;
-		}
-	}
+  &--secondary {
+    body.navbar-fixed-top & {
+      height: 50 + 70px;
+    }
+  }
 }
 
 @keyframes underdot-navlink {
-	0% {
-		left: 1.125rem;
-	}
-	100% {
-		left: calc(96% - 1.125rem);
-	}
+  0% {
+    left: 1.125rem;
+  }
+  100% {
+    left: calc(96% - 1.125rem);
+  }
 }
 
 @keyframes underdot-navlink-last {
-	0% {
-		left: 1.125rem;
-	}
-	100% {
-		left: 96%;
-	}
+  0% {
+    left: 1.125rem;
+  }
+  100% {
+    left: 96%;
+  }
 }
 
 @keyframes opacity {
-	0% {
-		opacity: 1;
-	}
+  0% {
+    opacity: 1;
+  }
 
-	99% {
-		opacity: 1;
-	}
+  99% {
+    opacity: 1;
+  }
 
-	100% {
-		opacity: 0;
-	}
+  100% {
+    opacity: 0;
+  }
 }

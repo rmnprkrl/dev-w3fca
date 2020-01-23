@@ -69,23 +69,26 @@
 
 .dashboard-output-group {
 	margin-bottom: 4px;
-	font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-		"Courier New", monospace !important;
+	color: white;
 }
 
 .dashboard-output-name {
 	display: inline-block;
-	color: white;
+
 	@media (max-width: 767px) {
 		margin-bottom: 4px;
 	}
 
 	@extend code;
+
+	color: white !important;
 }
 
 .dashboard-output-value {
 	display: inline-block;
 	padding: 4px;
+	font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace !important;
 
 	@media (max-width: 767px) {
 		display: block;
