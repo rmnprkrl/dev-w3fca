@@ -5,13 +5,15 @@
 	margin-bottom: 0;
 	border-radius: 0;
 
-	@media (min-width: 768px) {
-		position: fixed;
-		z-index: 99999;
-		width: 100%;
-		height: 90px;
-		top: 0;
-		transition: top 0.4s ease;
+	body:not(.p404) & {
+		@media (min-width: 768px) {
+			position: fixed;
+			z-index: 99999;
+			width: 100%;
+			height: 90px;
+			top: 0;
+			transition: top 0.4s ease;
+		}
 	}
 
 	.navbar-hidden & {
@@ -38,6 +40,10 @@
 
 .navbar-collapse {
 	flex-basis: 20%;
+
+	body.p404 & {
+		display: none !important;
+	}
 }
 
 section {

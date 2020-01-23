@@ -5,6 +5,10 @@ body {
 main.page-content {
 	@media (min-width: 768px) {
 		padding-top: 90px;
+
+		body.p404 & {
+			padding-top: 0;
+		}
 	}
 }
 
