@@ -3,19 +3,32 @@
 @import "../../node_modules/bootstrap-scss/bootstrap";
 @import "../../node_modules/tiny-slider/src/tiny-slider";
 @import "../../node_modules/aos/dist/aos";
-@import "material-icons";
-@import "variables";
-@import "theme";
-@import "typography";
 
-@import "default";
+/*
+Import default theme
+ */
+
+@import "default-theme/material-icons";
+@import "default-theme/theme";
+
+/*
+Import Polkadot theme
+*/
+
+@import "polkadot/default";
+@import "polkadot/variables";
+@import "polkadot/typography";
+@import "polkadot/navbar";
+@import "polkadot/bg";
+@import "polkadot/button";
+@import "polkadot/badge";
+@import "polkadot/icon";
+
+/*
+Custom
+*/
 
 @import "global";
-@import "navbar";
-@import "bg";
-@import "button";
-@import "badge";
-@import "icon";
 @import "custom";
 @import "slider";
 @import "dashboard";

@@ -1,5 +1,5 @@
 .btn {
-	font-weight: 600;
+	font-weight: $font-weight-bold;
 	border-radius: 1.5rem;
 	font-size: 16px;
 	padding: 8px 16px;
@@ -54,7 +54,7 @@
 		position: absolute;
 		top: 0;
 		background: $primary;
-		transition: all 0.2s ease, background-color 0.1s linear;
+		transition: all 0.2s ease;
 		will-change: transform;
 		color: transparent;
 		z-index: -1;
@@ -64,9 +64,9 @@
 	&:hover,
 	&:focus {
 		background: none;
-		color: white;
+		color: $white;
 		will-change: transform;
-		transform: scale(1.1);
+		transform: scale(1.05);
 		border: solid 1px transparent;
 	}
 
@@ -83,5 +83,5 @@
 }
 
 .btn-white {
-	color: white !important;
+	color: $white !important;
 }
