@@ -121,29 +121,14 @@ a.underline {
 	color: black !important;
 	display: inline-block;
 
+	@extend a.text-underline;
+
 	.bg-dark & {
 		color: $primary !important;
-	}
 
-	&:after {
-		content: "";
-		width: 100%;
-		height: 1px;
-		display: block;
-		background: $primary;
-		transition: 100ms;
-		will-change: transform;
-	}
-
-	&:hover {
 		&:after {
-			transform: translate(0, 1px);
+			background: $primary;
 		}
-	}
-
-	&:focus {
-		color: $primary;
-		text-decoration: none;
 	}
 }
 
@@ -181,7 +166,11 @@ code {
 }
 
 .abi-textarea {
-	color: black;
+	@extend code;
+
+	border: none;
+	background: black;
+	color: white;
 }
 
 .card.jsGoToAnchor,
@@ -254,6 +243,22 @@ a.back-to-top.sticky-viewport-bottom.position-fixed {
 
 		span {
 			height: 58px;
+		}
+	}
+}
+
+.btn-clipboard {
+	@extend .font-weight-bold;
+
+	&:after {
+		content: none;
+	}
+
+	.bg-dark & {
+		&:hover,
+		&:active,
+		&:focus {
+			color: white !important;
 		}
 	}
 }

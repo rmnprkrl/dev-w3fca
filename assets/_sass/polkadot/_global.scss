@@ -1,18 +1,64 @@
+html {
+	background-color: $primary;
+}
+
 body {
-  color: $black;
-  background-color: $primary;
+	color: $black;
+	background: transparent;
+}
+
+.header-bg {
+	display: none;
+
+	@media (min-width: 992px) {
+		display: block;
+		position: relative;
+		height: 120px;
+		background: white;
+	}
+}
+
+.page-wrapper {
+	&:before {
+		content: "";
+		z-index: -1;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+
+		$color1: $primary-darker;
+		$color2: $primary;
+		$color3: #6745d2;
+
+		background-image: linear-gradient(
+				217deg,
+				rgba($color1, 0.8),
+				rgba($color1, 0) 70%
+			),
+			linear-gradient(127deg, rgba($color2, 0.8), rgba($color2, 0) 70%),
+			linear-gradient(336deg, rgba($color3, 0.7), rgba($color3, 0) 70%);
+
+		background-attachment: fixed;
+		background-color: $primary;
+	}
+
+	section:last-child {
+		padding-bottom: 9rem;
+	}
 }
 
 a.back-to-top.sticky-viewport-bottom.position-fixed {
-  display: none !important;
+	display: none !important;
 }
 
 #mc_embed_signup_scroll {
-  .input-group-prepend {
-    height: 58px;
+	.input-group-prepend {
+		height: 58px;
 
-    span {
-      height: 58px;
-    }
-  }
+		span {
+			height: 58px;
+		}
+	}
 }

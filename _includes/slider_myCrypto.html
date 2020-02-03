@@ -73,17 +73,29 @@
 			</div>
 			<div class="col-12 col-lg-6 mb-3 pr-lg-5">
 				<div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
-					<p class="mb-3">
-						Copy the ABI from the text area below. Use <code>ctrl-a / cmd-a</code> to select-all and
-						<code>ctrl-c / cmd-c</code> to copy. It's also available <a href="{{site.baseurl}}/assets/abi.txt"
-							target="_blank" rel="noopener noreferrer">here</a>.
-					</p>
 					<textarea rows="12" cols="120" id="contract-abi" class="abi-textarea" style="max-width:100%;"></textarea>
 				</div>
 			</div>
 			<div class="col-12 col-lg-6">
+				<p class="mb-3">
+					<a href="#" class="btn btn-primary btn-clipboard">
+						<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+							<path fill="currentColor"
+								d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" />
+						</svg>
+						Copy</a> the ABI to your clipboard. It's also available <a href="{{site.baseurl}}/assets/abi.txt"
+						target="_blank" rel="noopener noreferrer">here</a>
+				</p>
 				<p>
-					Polkadot Claims Contract Address: <code id="claims-address">0x</code>
+					Polkadot Claims Contract Address: <code id="claims-address" class="bg-black text-white">0x</code>
+				</p>
+				<p>
+					<a href="#" class="btn btn-primary btn-clipboard">
+						<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+							<path fill="currentColor"
+								d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" />
+						</svg>
+						Copy</a> the address to your clipboard.
 				</p>
 				<p>
 					After putting this information into the blank inputs, click the "Access" button in MyCrypto to continue!
@@ -134,7 +146,7 @@
 					onblur="this.placeholder='Enter your Polkadot Address'">
 				<div class="dashboard-output mt-2">
 					<div class="dashboard-output-group">
-						<div class="dashboard-output-name">Decoded Public Key:</div>
+						<div class="dashboard-output-name bg-white text-black">Decoded Public Key:</div>
 						<div class="dashboard-output-value"><span id="decoded-pubkey">unknown</span></div>
 					</div>
 				</div>
@@ -192,5 +204,6 @@
 				</p>
 			</div>
 		</div>
+		<a href="#claim-verify" class="slider-arrow-down"><i class="material-icons">arrow_downward</i></a>
 	</div>
 </div>

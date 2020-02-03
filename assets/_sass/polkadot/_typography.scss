@@ -94,14 +94,14 @@ a.text-underline {
 		width: 100%;
 		height: 1px;
 		display: block;
-		transition: 100ms;
+		transition: transform 150ms ease-in-out;
 		will-change: transform;
 		background: $primary;
 	}
 
 	&:hover {
 		&:after {
-			transform: translate(0, 1px);
+			transform: translate(0, 2px);
 		}
 	}
 

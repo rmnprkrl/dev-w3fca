@@ -1,14 +1,25 @@
+html,
 body {
 	background: white;
 }
 
-main.page-content {
+main.page-wrapper {
+	background: transparent;
+
 	@media (min-width: 768px) {
 		padding-top: 90px;
+	}
+
+	&:before {
+		z-index: 0;
 	}
 }
 
 .row:before,
 .row:after {
 	display: inline-block;
+}
+
+footer {
+	position: relative;
 }
