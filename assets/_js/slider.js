@@ -67,8 +67,8 @@ $(document).ready(function() {
 	});
 });
 
-let sliderInnerA = tns({
-	container: '#nested_innerA',
+let sliderInnerMycrypto = tns({
+	container: '#nested_inner_mycrypto',
 	mode: 'gallery',
 	items: 1,
 	nested: 'inner',
@@ -99,8 +99,8 @@ const sliderA = tns({
 $(document).ready(function() {
 	$('.jsSliderGoToA').click(function() {
 		let sliderIndex = $(this).data('slider') - 1;
-		slider.goTo(sliderIndex);
-		let index = slider.getInfo().index;
+		sliderA.goTo(sliderIndex);
+		let index = sliderA.getInfo().index;
 		$('.jsSliderGoToA.jsActive').removeClass('active');
 		$('.jsSliderGoToA.jsActive')
 			.eq(index)

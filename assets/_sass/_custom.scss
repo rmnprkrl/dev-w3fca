@@ -262,3 +262,7 @@ a.back-to-top.sticky-viewport-bottom.position-fixed {
 		}
 	}
 }
+
+.text-link {
+	@extend a.text-underline;
+}

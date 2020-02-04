@@ -19,6 +19,7 @@ config.webpack.plugins = [
 		$: 'jquery',
 		jQuery: 'jquery',
 		'window.jQuery': 'jquery'
+		// ClipboardJS: 'clipboard'
 	})
 ];
 

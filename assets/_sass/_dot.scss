@@ -8,7 +8,8 @@
 	will-change: transform;
 
 	#nested_inner_polkadot_js_plugin .tns-slide-active &,
-	#nested_inner_slider_polkadot_js .tns-slide-active & {
+	#nested_inner_slider_polkadot_js .tns-slide-active &,
+	#nested_inner_mycrypto .tns-slide-active & {
 		animation: pulsing-dot 1.5s ease-in-out infinite;
 	}
 
@@ -203,6 +204,28 @@
 	#s4_5 & {
 		top: 43.9%;
 		right: -1rem;
+	}
+
+	// slider mycrypto
+
+	#sA_3 & {
+		top: 28.9%;
+		left: 16.5%;
+	}
+
+	#sA_4 & {
+		top: 51.9%;
+		left: 18.5%;
+	}
+
+	#sA_5 & {
+		top: 28.9%;
+		left: 58.5%;
+	}
+
+	#sA_6 & {
+		top: 86.2%;
+		left: 18.5%;
 	}
 }
 

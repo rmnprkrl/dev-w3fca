@@ -1,4 +1,4 @@
-<div id="nested_innerA">
+<div id="nested_inner_mycrypto">
 	<div>
 		<div class="row mb-5">
 			<div class="col-12 col-lg-6 pr-lg-5">
@@ -36,7 +36,7 @@
 			</div>
 			<div class="col-12 col-lg-6 slider-img-wrapper">
 				<div class="slider-img">
-					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/MyCrypto_012.png">
+					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/slider/MyCrypto_01.jpg">
 				</div>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 	<div>
 		<div class="row mb-5">
 			<div class="col-12 col-lg-6 pr-lg-5">
-				<h2 class="text-white">Interacting with Contracts</h2>
+				<h2 class="text-white mb-3">Interacting with contracts</h2>
 				<p>
 					Once the MyCrypto application is installed, open it and navigate to the Contracts tab. If you're using the
 					locally downloaded app, this will appear as a sidebar on your application screen. If you're using the browser,
@@ -59,8 +59,9 @@
 				</p>
 			</div>
 			<div class="col-12 col-lg-6 slider-img-wrapper">
-				<div class="slider-img">
-					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/MyCrypto_014.png">
+				<div id="sA_3" class="slider-img">
+					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/slider/MyCrypto_02.jpg">
+					<div class="dot"></div>
 				</div>
 			</div>
 		</div>
@@ -68,67 +69,89 @@
 
 	<div>
 		<div class="row mb-5">
-			<div class="col-12">
-				<h2 class="text-white mb-3">Claims Contract ABI <br>and Address</h2>
-			</div>
 			<div class="col-12 col-lg-6 mb-3 pr-lg-5">
+				<h2 class="text-white mb-3">Claims contract ABI</h2>
 				<div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
-					<textarea rows="12" cols="120" id="contract-abi" class="abi-textarea" style="max-width:100%;"></textarea>
+					<code class="bg-white text-black d-inline-block mb-1">ABI:</code>
+					<textarea rows="4" cols="120" id="contract-abi" class="abi-textarea" style="max-width:100%;"></textarea>
 				</div>
+				<p class="mt-2">
+					Copy ABI to your clipboard and paste into the ABI input in MyCrypto.
+				</p>
+				<p>
+					<button class="btn btn-primary btn-clipboard mr-1" data-clipboard-target="#contract-abi">
+						<svg style="width:24px; height:24px" viewBox="0 0 24 24">
+							<path fill="currentColor"
+								d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" />
+						</svg>
+						<span>Copy</span>
+					</button>
+				</p>
 			</div>
-			<div class="col-12 col-lg-6">
-				<p class="mb-3">
-					<a href="#" class="btn btn-primary btn-clipboard">
-						<svg style="width:24px;height:24px" viewBox="0 0 24 24">
-							<path fill="currentColor"
-								d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" />
-						</svg>
-						Copy</a> the ABI to your clipboard. It's also available <a href="{{site.baseurl}}/assets/abi.txt"
-						target="_blank" rel="noopener noreferrer">here</a>
-				</p>
-				<p>
-					Polkadot Claims Contract Address: <code id="claims-address" class="bg-black text-white">0x</code>
-				</p>
-				<p>
-					<a href="#" class="btn btn-primary btn-clipboard">
-						<svg style="width:24px;height:24px" viewBox="0 0 24 24">
-							<path fill="currentColor"
-								d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" />
-						</svg>
-						Copy</a> the address to your clipboard.
-				</p>
-				<p>
-					After putting this information into the blank inputs, click the "Access" button in MyCrypto to continue!
-				</p>
+			<div class="col-12 col-lg-6 slider-img-wrapper">
+				<div id="sA_4" class="slider-img">
+					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/slider/MyCrypto_03.jpg">
+					<div class="dot"></div>
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<div>
 		<div class="row mb-5">
-			<div class="col-12">
-				<h2 class="text-white mb-3">Entering Inputs</h2>
-			</div>
-			<div class="col-12 col-lg-6">
+			<div class="col-12 col-lg-6 mb-3 pr-lg-5">
+				<h2 class="text-white mb-3">Claims contract address</h2>
 				<p>
-					Select the <code>claim</code> function from the dropdown menu and enter the address of the Ethereum account
-					that holds the balance of dot allocation you are going to claim.
+					<code class="bg-white text-black d-inline-block mb-1">Address:</code>
+					<code id="claims-address" class="bg-black text-white d-inline-block">0x</code>
+				</p>
+				<p>
+					Copy the contract address to your clipboard and paste into the address input in MyCrypto.
+				</p>
+				<p>
+					<button class="btn btn-primary btn-clipboard mr-1" data-clipboard-target="#claims-address">
+						<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+							<path fill="currentColor"
+								d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" />
+						</svg>
+						<span>Copy</span></button>
+				</p>
+				<p>
+					After putting this information into the blank inputs, click the "Access" button in MyCrypto to continue.
+				</p>
+			</div>
+			<div class="col-12 col-lg-6 slider-img-wrapper">
+				<div id="sA_5" class="slider-img">
+					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/slider/MyCrypto_04.jpg">
+					<div class="dot"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div>
+		<div class="row mb-5">
+			<div class="col-12 col-lg-6 mb-3 pr-lg-5">
+				<h2 class="text-white mb-3">Entering inputs</h2>
+				<p>
+					Select the <code class="bg-white text-black">claims</code> function from the dropdown menu and enter the
+					address of the Ethereum account that holds the balance of dot allocation you are going to claim.
 				</p>
 				<p>
 					The Ethereum address for your claim is usually the same address that you are planning to send the
 					transaction from. If you are using an amended Ethereum address, you must use the original address attached to
 					your allocation to claim (even if you used the amended address to check your claim).
 				</p>
-			</div>
-			<div class="col-12 col-lg-6">
 				<p>
 					For the public key field you will use the decoded public key of your address. On the next slide you can
 					input your address into the decoder to get your raw public key.
 				</p>
 			</div>
-			<div class="col-12 slider-img-wrapper mt-3">
-				<div class="slider-img">
-					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/MyCrypto_016.png">
+			<div class="col-12 col-lg-6 slider-img-wrapper">
+				<div id="sA_6" class="slider-img">
+					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/slider/MyCrypto_05.jpg">
+					<div class="dot"></div>
 				</div>
 			</div>
 		</div>
@@ -136,9 +159,7 @@
 
 	<div>
 		<div class="row mb-5">
-			<div class="col-12">
-				<h2 class="text-white mb-5">Get Your Public Key</h2>
-			</div>
+			<h2 class="col-12 text-white mb-5">Get your public key</h2>
 			<div class="col-12">
 				<input type='text' class="dashboard-input mb-5" onchange="window.getPubkey(); " onkeyup="this.onchange();"
 					onpaste="this.onchange();" oninput="this.onchange();" id="dot-addr-inp"
@@ -156,19 +177,17 @@
 
 	<div>
 		<div class="row mb-5">
-			<div class="col-12">
-				<h2 class="text-white mb-3">Sending the Transaction</h2>
-			</div>
+			<h2 class="col-12 text-white mb-3">Sending the transaction</h2>
 			<div class="col-12 col-lg-6">
 				<p>
 					First unlock your account by selecting the option that matches the way that you've stored your
 					Ethereum private key. After you've unlocked your account you can continue with the instruction below.
 				</p>
 				<p>
-					Uncheck the box that says Automatically Calculate Gas Limit and instead use <code>200000</code> as the gas
-					limit. You can make changes to the gas price or simply keep it at the default. The network gas price is
-					available at <a href="https://www.ethgasstation.info/" target="_blank" rel="noopener noreferrer">ETH Gas
-						Station</a>.
+					Uncheck the box that says Automatically Calculate Gas Limit and instead use <code
+						class="bg-white text-black">200000</code> as the gas limit. You can make changes to the gas price or simply
+					keep it at the default. The network gas price is available at <a href="https://www.ethgasstation.info/"
+						target="_blank" rel="noopener noreferrer">ETH Gas Station</a>.
 				</p>
 			</div>
 			<div class="col-12 col-lg-6">
@@ -186,9 +205,7 @@
 
 	<div>
 		<div class="row mb-5">
-			<div class="col-12">
-				<h2 class="text-white mb-3">Verifying your Claim</h2>
-			</div>
+			<h2 class="col-12 text-white mb-3">Verifying your claim</h2>
 			<div class="col-12 col-lg-6">
 				<p>
 					The dots are not available to you until Polkadot launches. However, if you would like to verify your claim
@@ -199,7 +216,7 @@
 			</div>
 			<div class="col-12 col-lg-6">
 				<p>
-					If all of this data looks right then your claim was a success! When Polkadot launches, the DOTs will be
+					If all of this data looks right then your claim was a success! When Polkadot launches, the dots will be
 					available automatically in your Polkadot address immediately from genesis.
 				</p>
 			</div>
