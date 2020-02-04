@@ -148,19 +148,19 @@ const check = async () => {
     return;
   } else {
     // console.log('results', results);
-    document.getElementById('eth-address').innerHTML = results.original;
+    document.getElementById('eth-address').innerHTML = results.original == 'None' ? 'None' : results.original.join(', ');
     document.getElementById('pd-address').innerHTML = results.pdAddress;
     document.getElementById('pubkey').innerHTML = results.pubkey;
     document.getElementById('index').innerHTML = results.index;
-    document.getElementById('balance').innerHTML = results.balance;
-    document.getElementById('vesting').innerHTML = results.vesting ? results.vesting + ' DOT' : 'None';
+    document.getElementById('balance').innerHTML = results.balance / 1000;
+    document.getElementById('vesting').innerHTML = results.vesting ? results.vesting/1000 + ' DOT' : 'None';
   }
 }
 
 // This takes the length 42 string.
 const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment) => {
   let ethData = {
-    original: ethAddress,
+    original: [ethAddress],
     amendedTo: null,
     balance: null,
     vesting: null,
@@ -171,14 +171,14 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
     fromBlock: '9200000',
     toBlock: 'latest',
     filter: {
-      original: [ethData.original],
+      original: ethData.original,
       // amendedTo: [ethData.original],
     },
   });
 
-  if (amendedToLogs && amendedToLogs.length && ethData.original !== '0x00b46c2526e227482e2EbB8f4C69E4674d262E75') {
+  if (amendedToLogs && amendedToLogs.length && ethData.original[0] !== '0x00b46c2526e227482e2EbB8f4C69E4674d262E75') {
     const {original, amendedTo} = amendedToLogs[0].returnValues;
-    ethData.original = original;
+    ethData.original = [original];
     ethData.amendedTo = amendedTo;
   }
 
@@ -198,17 +198,17 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
     toBlock: 'latest',
     filter: {
       // original: [ethData.original],
-      amendedTo: [ethData.original],
+      amendedTo: ethData.original,
     },
   });
 
-  if (amendedForLogs && amendedForLogs.length && ethData.original !== '0x00b46c2526e227482e2EbB8f4C69E4674d262E75') {
+  if (amendedForLogs && amendedForLogs.length && ethData.original[0] !== '0x00b46c2526e227482e2EbB8f4C69E4674d262E75') {
     const {original, amendedTo} = amendedForLogs[0].returnValues;
-    ethData.original = original;
+    ethData.original = [original];
     ethData.amendedTo = amendedTo;
   }
 
-  ethData.balance = await frozenToken.methods.balanceOf(ethData.original).call();
+  ethData.balance = await frozenToken.methods.balanceOf(ethData.original[0]).call();
 
   if (Number(ethData.balance) === 0) {
     return { noBalance: true, };
@@ -218,11 +218,11 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
     fromBlock: '9200000',
     toBlock: 'latest',
     filter: {
-      eth: [ethData.original],
+      eth: ethData.original,
     }
   });
 
-  console.log(vestedLogs)
+  console.log('vLogs', vestedLogs);
 
   if (vestedLogs && vestedLogs.length) {
     ethData.vesting = vestedLogs[0].returnValues.amount;
@@ -232,7 +232,7 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
     fromBlock: '9200000',
     toBlock: 'latest',
     filter: {
-      eth: [ethData.original],
+      eth: ethData.original,
     }
   });
 
@@ -240,9 +240,9 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
     ethData.vesting = vestedIncreasedLogs[vestedIncreasedLogs.length-1].returnValues.newTotal;
   }
 
-  const claimData = await claims.methods.claims(ethData.original).call();
-  console.log(claimData);
-  console.log(ethData);
+  const claimData = await claims.methods.claims(ethData.original[0]).call();
+  console.log('claimData', claimData);
+  console.log('ethDAta', ethData);
   const { index, pubKey } = claimData;
   if (pubKey == '0x0000000000000000000000000000000000000000000000000000000000000000') {
     ethData.index = 'None';
@@ -256,18 +256,35 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
     ethData.pdAddress = encodeAddress(pUtil.hexToU8a(pubKey), 0);
   }
 
-  // Normalize balances
-  ethData.balance = Number(ethData.balance) / 1000;
+  ethData.balance = Number(ethData.balance);
   if (ethData.vesting) {
-    ethData.vesting = Number(ethData.vesting) / 1000;
+    ethData.vesting = Number(ethData.vesting);
   }
-
   return ethData;
 }
 
 const getPolkadotData = async (pubkey, claims, frozenToken) => {
-  const claimsForPubkey = await claims.methods.claimsForPubkey(pubkey, 0).call();
-  return getEthereumData(claimsForPubkey, claims, frozenToken, true);
+  const zeroAddress = '0x' + '00'.repeat(20);
+
+  let claimsForPubkey = await claims.methods.claimsForPubkey(pubkey, 0).call();
+  let accumulated = await getEthereumData(claimsForPubkey, claims, frozenToken, true);
+  let counter = 0;
+  while (claimsForPubkey != zeroAddress) {
+    counter++;
+    try {
+      claimsForPubkey = await claims.methods.claimsForPubkey(pubkey, counter).call();
+    } catch (err) { break; }
+    if (claimsForPubkey == zeroAddress) break; 
+    await new Promise((resolve) => setTimeout(() => resolve()), 500);
+    const data = await getEthereumData(claimsForPubkey, claims, frozenToken, true);
+    console.log('DATA', data)
+    accumulated.balance += data.balance || 0;
+    accumulated.vesting += data.vesting || 0;
+    accumulated.original.push(...data.original);
+    console.log('ACCUM', accumulated)
+  }
+  console.log('returning accumulated', accumulated)
+  return accumulated;
 }
 
 window.infoBoxChecker = check;
