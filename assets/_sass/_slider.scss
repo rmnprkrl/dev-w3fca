@@ -14,6 +14,16 @@
 	height: auto;
 }
 
+.sliderA {
+	height: 30vh;
+	visibility: hidden;
+}
+
+.tns-outer .sliderA {
+	visibility: visible;
+	height: auto;
+}
+
 .slider-step {
 	position: absolute;
 	top: -1.5rem;
