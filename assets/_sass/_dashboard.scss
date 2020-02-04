@@ -79,9 +79,11 @@
 		margin-bottom: 4px;
 	}
 
-	@extend code;
-	padding: 2px 6px !important;
+	background: $secondary-darker;
 
+	@extend code;
+
+	padding: 2px 6px !important;
 	color: white !important;
 }
 
