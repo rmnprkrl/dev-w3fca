@@ -2,7 +2,7 @@ const { encodeAddress, decodeAddress } = require('@polkadot/keyring');
 const pUtil = require('@polkadot/util');
 const Web3 = require('web3');
 
-const { addClassVerified, removeClassVerified } = require('./util');
+const { addClassVerified, removeClassVerified, addClassWaiting, removeClassWaiting } = require('./util');
 
 const { createType, TypeRegistry } = require('@polkadot/types');
 const { setSS58Format } = require('@polkadot/util-crypto');
@@ -138,10 +138,12 @@ const check = async () => {
 
   if (value.length === 48 || value.length === 47) {
     try {
+			addClassWaiting('claim-verify');
       value = pUtil.u8aToHex(decodeAddress(value, 0));
     } catch (err) {
       console.log(err);
-      console.log('error decoding polkadot address', value);
+			console.log('error decoding polkadot address', value);
+			removeClassWaiting('claim-verify');
       return;
     }
   }
@@ -151,7 +153,8 @@ const check = async () => {
     : await getPolkadotData(value, claims, frozenToken);
 
   if (results.noBalance) {
-    console.log("This account does not have balance. Are you sure you're using the right address?");
+		console.log("This account does not have balance. Are you sure you're using the right address?");
+		removeClassWaiting('claim-verify');
     return;
   } else {
     // console.log('results', results);
@@ -161,6 +164,7 @@ const check = async () => {
     document.getElementById('index').innerHTML = results.index;
     document.getElementById('balance').innerHTML = results.balance / 1000;
 		document.getElementById('vesting').innerHTML = results.vesting ? results.vesting/1000 + ' DOT' : 'None';
+		removeClassWaiting('claim-verify');
 		addClassVerified('claim-verify');
   }
 }
