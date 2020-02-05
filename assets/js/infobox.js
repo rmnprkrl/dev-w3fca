@@ -51,7 +51,8 @@ document.getElementById('contract-abi').innerHTML = JSON.stringify(ClaimsArtifac
 const validAddress = async () => {
   let { value } = document.getElementById('validity-input');
   if (value.length !== 42) {
-    document.getElementById('validity-statement').innerHTML = 'Not a valid Ethereum address.';
+		document.getElementById('validity-statement').innerHTML = 'Not a valid Ethereum address.';
+		removeClassVerified('verify-ethereum-address');
     return;
   }
 
@@ -103,11 +104,14 @@ const validAddress = async () => {
   }
 
   if (Number(ethData.balance) === 0 || (ethData.amendedTo && !amendedForLogs.length)) {
-    document.getElementById('validity-statement').innerHTML = "There is not a claim associated with this address. Did you use the right one?"
+		document.getElementById('validity-statement').innerHTML = "There is not a claim associated with this address. Did you use the right one?"
+		removeClassVerified('verify-ethereum-address');
   } else if (amendedForLogs.length) {
-    document.getElementById('validity-statement').innerHTML = `${ethData.original} is amended to ${ethData.amendedTo}. Only the amended address can make the claim.`;
+		document.getElementById('validity-statement').innerHTML = `${ethData.original} is amended to ${ethData.amendedTo}. Only the amended address can make the claim.`;
+		removeClassVerified('verify-ethereum-address');
   } else {
-    document.getElementById('validity-statement').innerHTML = "You have a claim! Please proceed with the next step!";
+		document.getElementById('validity-statement').innerHTML = "You have a claim! Please proceed with the next step!";
+		addClassVerified('verify-ethereum-address');
   }
 }
 
@@ -274,7 +278,7 @@ const getPolkadotData = async (pubkey, claims, frozenToken) => {
     try {
       claimsForPubkey = await claims.methods.claimsForPubkey(pubkey, counter).call();
     } catch (err) { break; }
-    if (claimsForPubkey == zeroAddress) break; 
+    if (claimsForPubkey == zeroAddress) break;
     await new Promise((resolve) => setTimeout(() => resolve()), 500);
     const data = await getEthereumData(claimsForPubkey, claims, frozenToken, true);
     console.log('DATA', data)
@@ -287,7 +291,23 @@ const getPolkadotData = async (pubkey, claims, frozenToken) => {
   return accumulated;
 }
 
+const addClassVerified = (id) => {
+	let element, name, arr;
+	element = document.getElementById(id);
+	name = 'verified';
+	arr = element.className.split(' ');
+	if (arr.indexOf(name) == -1) {
+		element.className += ' ' + name;
+	}
+}
+
+const removeClassVerified = (id) => {
+	let element = document.getElementById(id);
+	element.className = element.className.replace(/\bverified\b/g, '');
+}
+
 window.infoBoxChecker = check;
 window.validAddress = validAddress;
+
 
 // npx browserify infobox.js > infobox-browser.js; npx uglify-es --mangle --compress -- infobox-browser.js > infobox.min.js; rm infobox-browser.js
