@@ -6,6 +6,11 @@
 	border-radius: 50%;
 	background: $primary;
 	will-change: transform;
+	opacity: 0;
+
+	.tns-lazy-img.loaded.tns-complete ~ & {
+		opacity: 1;
+	}
 
 	#nested_inner_polkadot_js_plugin .tns-slide-active &,
 	#nested_inner_slider_polkadot_js .tns-slide-active &,

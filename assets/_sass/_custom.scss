@@ -336,3 +336,27 @@ a.back-to-top.sticky-viewport-bottom.position-fixed {
 		stroke-dashoffset: 0;
 	}
 }
+
+#get-decoded-pubkey {
+	.btn-clipboard {
+		display: none;
+	}
+
+	&.verified {
+		.btn-clipboard {
+			display: block;
+			animation: fade-up 0.4s linear forwards;
+		}
+	}
+}
+
+@keyframes fade-up {
+	from {
+		transform: translate(0, 2rem);
+		opacity: 0;
+	}
+	to {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+}

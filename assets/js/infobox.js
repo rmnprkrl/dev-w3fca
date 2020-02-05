@@ -2,6 +2,8 @@ const { encodeAddress, decodeAddress } = require('@polkadot/keyring');
 const pUtil = require('@polkadot/util');
 const Web3 = require('web3');
 
+const { addClassVerified, removeClassVerified } = require('./util');
+
 const { createType, TypeRegistry } = require('@polkadot/types');
 const { setSS58Format } = require('@polkadot/util-crypto');
 
@@ -291,21 +293,6 @@ const getPolkadotData = async (pubkey, claims, frozenToken) => {
   }
   console.log('returning accumulated', accumulated)
   return accumulated;
-}
-
-const addClassVerified = (id) => {
-	let element, name, arr;
-	element = document.getElementById(id);
-	name = 'verified';
-	arr = element.className.split(' ');
-	if (arr.indexOf(name) == -1) {
-		element.className += ' ' + name;
-	}
-}
-
-const removeClassVerified = (id) => {
-	let element = document.getElementById(id);
-	element.className = element.className.replace(/\bverified\b/g, '');
 }
 
 window.infoBoxChecker = check;

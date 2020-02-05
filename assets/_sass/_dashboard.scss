@@ -18,6 +18,7 @@
 		line-height: 2rem;
 		border-radius: 0.5rem;
 		background: white;
+		color: $black;
 	}
 
 	border: solid 1px white;
@@ -46,10 +47,10 @@
 		transform: scale(1.03);
 		border: solid 1px transparent;
 		outline: 0 !important;
-		color: black;
+		color: $black;
 
 		&::placeholder {
-			color: black;
+			color: $black;
 			transform: scale(1);
 		}
 	}
@@ -62,7 +63,7 @@
 		@media (max-width: 767px) {
 			transform: scale(1);
 			opacity: 1;
-			color: black;
+			color: $black;
 		}
 	}
 }
