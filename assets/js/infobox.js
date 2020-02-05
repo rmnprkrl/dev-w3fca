@@ -53,7 +53,7 @@ const validAddress = async () => {
   if (value.length !== 42) {
 		document.getElementById('validity-statement').innerHTML = 'Not a valid Ethereum address.';
 		removeClassVerified('verify-ethereum-address');
-    return;
+			return;
   }
 
   if (!frozenToken || !claims) {
@@ -124,7 +124,8 @@ const check = async () => {
     document.getElementById('pubkey').innerHTML = 'None';
     document.getElementById('index').innerHTML = 'None';
     document.getElementById('balance').innerHTML = '0';
-    document.getElementById('vesting').innerHTML = 'None';
+		document.getElementById('vesting').innerHTML = 'None';
+		removeClassVerified('claim-verify');
     return;
   }
 
@@ -157,7 +158,8 @@ const check = async () => {
     document.getElementById('pubkey').innerHTML = results.pubkey;
     document.getElementById('index').innerHTML = results.index;
     document.getElementById('balance').innerHTML = results.balance / 1000;
-    document.getElementById('vesting').innerHTML = results.vesting ? results.vesting/1000 + ' DOT' : 'None';
+		document.getElementById('vesting').innerHTML = results.vesting ? results.vesting/1000 + ' DOT' : 'None';
+		addClassVerified('claim-verify');
   }
 }
 
