@@ -3,6 +3,7 @@
 require('expose-loader?$!jquery');
 import AOS from 'aos';
 import 'bootstrap';
+import ClipboardJS from 'clipboard/dist/clipboard.js';
 
 AOS.init({
 	duration: 1100,
@@ -19,15 +20,17 @@ document.addEventListener('aos:in:step-checker', ({ detail }) => {
 	}, 1200);
 });
 
-// let clipboard = new ClipboardJS('.btn-clipboard');
+let clipboard = new ClipboardJS('.btn-clipboard');
 
-// clipboard.on('success', function(e) {
-// 	let console = console.info('Trigger:', e.trigger);
-// 	console.info('Action:', e.action);
-// 	console.info('Text:', e.text);
-// 	console.log('Trigger:', e.trigger);
-// 	e.clearSelection();
-// });
+clipboard.on('success', function(e) {
+	let buttonText = e.trigger.children[1];
+	buttonText.innerHTML = 'Copied!';
+	setTimeout(function() {
+		buttonText.innerHTML = 'Copy';
+		if (document.activeElement != document.body) document.activeElement.blur();
+	}, 600);
+	e.clearSelection();
+});
 
 import './scroll.js';
 import './slider.js';

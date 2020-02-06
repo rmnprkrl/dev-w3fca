@@ -15,22 +15,7 @@
 
 	{%- include footer.html -%}
 
-	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 	<script src="{{ "/assets/js/bundle.js" | relative_url }}" type="text/javascript"></script>
-
-	<script>
-		var clipboard = new ClipboardJS('.btn-clipboard');
-
-		clipboard.on('success', function (e) {
-			let buttonText = e.trigger.children[1];
-			buttonText.innerHTML = "Copied!";
-			setTimeout(function () {
-				buttonText.innerHTML = "Copy";
-			}, 600)
-			e.clearSelection();
-		});
-
-	</script>
 
 </body>
 
