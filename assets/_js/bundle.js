@@ -1,6 +1,3 @@
-/* eslint-disable object-curly-spacing */
-/* eslint-disable comma-dangle */
-
 'use strict';
 
 require('expose-loader?$!jquery');

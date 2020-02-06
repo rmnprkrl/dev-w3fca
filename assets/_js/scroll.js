@@ -1,6 +1,3 @@
-/* eslint-disable no-invalid-this */
-/* eslint-disable comma-dangle */
-
 import 'jquery-smooth-scroll';
 
 $(document).ready(function() {

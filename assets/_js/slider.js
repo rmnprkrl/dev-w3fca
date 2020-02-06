@@ -1,8 +1,4 @@
-/* eslint-disable object-curly-spacing */
-/* eslint-disable comma-dangle */
-/* eslint-disable no-tabs */
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-invalid-this */
 
 import { tns } from 'tiny-slider/src/tiny-slider';
 

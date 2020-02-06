@@ -13,7 +13,10 @@ module.exports = {
 		'no-var': 'warn',
 		'require-jsdoc': 'off',
 		indent: [2, 'tab'],
-		'no-tabs': 0
+		'no-tabs': 0,
+		'no-invalid-this': 0,
+		'comma-dangle': 0,
+		'object-curly-spacing': 0
 	},
 	parserOptions: {
 		sourceType: 'module'
