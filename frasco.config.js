@@ -54,8 +54,23 @@ module.exports = {
 	webpack: {
 		mode: 'production',
 		module: {
-			rules: []
+			rules: [
+				{
+					test: require.resolve('jquery'),
+					use: [
+						{
+							loader: 'expose-loader',
+							options: 'jQuery'
+						},
+						{
+							loader: 'expose-loader',
+							options: '$'
+						}
+					]
+				}
+			]
 		},
-		plugins: []
+		plugins: [],
+		externals: {}
 	}
 };

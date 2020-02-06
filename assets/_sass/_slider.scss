@@ -104,6 +104,10 @@
 		bottom 0.4s ease-in-out;
 	text-align: center;
 
+	@media (max-width: 767px) {
+		right: 0;
+	}
+
 	i {
 		line-height: 3rem;
 		color: white;

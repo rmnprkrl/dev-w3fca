@@ -14,15 +14,6 @@ for (var i = 0; i <= config.js.entry.length - 1; i++) {
 
 if (config.tasks.eslint) config.webpack.module.rules.push(config.eslintLoader);
 
-config.webpack.plugins = [
-	new webpack.ProvidePlugin({
-		$: 'jquery',
-		jQuery: 'jquery',
-		'window.jQuery': 'jquery'
-		// ClipboardJS: 'clipboard'
-	})
-];
-
 config.webpack.watch = argv.watch;
 config.webpack.mode = argv.mode || config.webpack.mode;
 

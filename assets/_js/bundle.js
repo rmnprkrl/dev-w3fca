@@ -1,12 +1,11 @@
 /* eslint-disable object-curly-spacing */
 /* eslint-disable comma-dangle */
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-labels */
 
 'use strict';
 
+require('expose-loader?$!jquery');
 import AOS from 'aos';
-// import ClipboardJS from 'clipboard';
+import 'bootstrap';
 
 AOS.init({
 	duration: 1100,
@@ -26,7 +25,7 @@ document.addEventListener('aos:in:step-checker', ({ detail }) => {
 // let clipboard = new ClipboardJS('.btn-clipboard');
 
 // clipboard.on('success', function(e) {
-// 	let console = console;
+// 	let console = console.info('Trigger:', e.trigger);
 // 	console.info('Action:', e.action);
 // 	console.info('Text:', e.text);
 // 	console.log('Trigger:', e.trigger);
@@ -36,4 +35,3 @@ document.addEventListener('aos:in:step-checker', ({ detail }) => {
 import './scroll.js';
 import './slider.js';
 import './header.js';
-import './faq.js';
