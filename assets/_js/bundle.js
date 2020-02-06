@@ -20,15 +20,17 @@ document.addEventListener('aos:in:step-checker', ({ detail }) => {
 	}, 1200);
 });
 
-let clipboard = new ClipboardJS('.btn-clipboard');
+const clipboard = new ClipboardJS('.btn-clipboard');
 
 clipboard.on('success', function(e) {
 	let buttonText = e.trigger.children[1];
-	buttonText.innerHTML = 'Copied!';
+	buttonText.innerHTML = 'Copied';
+
 	setTimeout(function() {
 		buttonText.innerHTML = 'Copy';
 		if (document.activeElement != document.body) document.activeElement.blur();
 	}, 600);
+
 	e.clearSelection();
 });
 

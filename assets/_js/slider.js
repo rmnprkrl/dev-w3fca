@@ -2,7 +2,7 @@
 
 import { tns } from 'tiny-slider/src/tiny-slider';
 
-let sliderInnerPolkadotJsPlugin = tns({
+const sliderInnerPolkadotJsPlugin = tns({
 	container: '#nested_inner_polkadot_js_plugin',
 	mode: 'gallery',
 	items: 1,
@@ -12,14 +12,14 @@ let sliderInnerPolkadotJsPlugin = tns({
 	controls: true,
 	nav: true,
 	navPosition: 'bottom',
-	controlsPosition: 'top',
+	controlsPosition: 'bottom',
 	autoplay: false,
 	loop: false,
 	lazyload: true,
 	autoHeight: false
 });
 
-let sliderInnerPolkadotJs = tns({
+const sliderInnerPolkadotJs = tns({
 	container: '#nested_inner_slider_polkadot_js',
 	mode: 'gallery',
 	items: 1,
@@ -63,7 +63,7 @@ $(document).ready(function() {
 	});
 });
 
-let sliderInnerMycrypto = tns({
+const sliderInnerMycrypto = tns({
 	container: '#nested_inner_mycrypto',
 	mode: 'gallery',
 	items: 1,
@@ -76,7 +76,8 @@ let sliderInnerMycrypto = tns({
 	controlsPosition: 'bottom',
 	autoplay: false,
 	loop: false,
-	lazyload: true
+	lazyload: true,
+	autoHeight: false
 });
 
 const sliderA = tns({
@@ -89,7 +90,9 @@ const sliderA = tns({
 	controls: false,
 	nav: false,
 	loop: false,
-	speed: 600
+	speed: 600,
+	lazyload: true,
+	autoHeight: false
 });
 
 $(document).ready(function() {
