@@ -106,3 +106,14 @@ $(document).ready(function() {
 			.addClass('active');
 	});
 });
+
+window.onload = function() {
+	let hash = window.location.hash.replace('#', '');
+	if (hash == 'get-converted-address') {
+		$.smoothScroll({
+			scrollTarget: '#wallet-create'
+		});
+		slider.goTo(0);
+		sliderInnerPolkadotJsPlugin.goTo(13);
+	}
+};
