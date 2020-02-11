@@ -51,17 +51,7 @@ const slider = tns({
 	autoHeight: false
 });
 
-$(document).ready(function() {
-	$('.jsSliderGoTo').click(function() {
-		let sliderIndex = $(this).data('slider') - 1;
-		slider.goTo(sliderIndex);
-		let index = slider.getInfo().index;
-		$('.jsSliderGoTo.jsActive').removeClass('active');
-		$('.jsSliderGoTo.jsActive')
-			.eq(index)
-			.addClass('active');
-	});
-});
+// sliderA
 
 const sliderInnerMycrypto = tns({
 	container: '#nested_inner_mycrypto',
@@ -96,6 +86,16 @@ const sliderA = tns({
 });
 
 $(document).ready(function() {
+	$('.jsSliderGoTo').click(function() {
+		let sliderIndex = $(this).data('slider') - 1;
+		slider.goTo(sliderIndex);
+		let index = slider.getInfo().index;
+		$('.jsSliderGoTo.jsActive').removeClass('active');
+		$('.jsSliderGoTo.jsActive')
+			.eq(index)
+			.addClass('active');
+	});
+
 	$('.jsSliderGoToA').click(function() {
 		let sliderIndex = $(this).data('slider') - 1;
 		sliderA.goTo(sliderIndex);
@@ -104,6 +104,11 @@ $(document).ready(function() {
 		$('.jsSliderGoToA.jsActive')
 			.eq(index)
 			.addClass('active');
+	});
+
+	$('.jsGetConvertedAddress').click(function() {
+		slider.goTo(0);
+		sliderInnerPolkadotJsPlugin.goTo(10);
 	});
 });
 
@@ -114,6 +119,6 @@ window.onload = function() {
 			scrollTarget: '#wallet-create'
 		});
 		slider.goTo(0);
-		sliderInnerPolkadotJsPlugin.goTo(13);
+		sliderInnerPolkadotJsPlugin.goTo(10);
 	}
 };
