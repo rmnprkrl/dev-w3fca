@@ -136,7 +136,7 @@
 				<h2 class="text-white mb-3">Entering inputs</h2>
 				<p>
 					Select the <code class="bg-white text-black">claim</code> function from the dropdown menu.<br>
-					Notice that there is also a function called claims in the same dropdown menu &mdash; be sure that you have
+					Notice that there is also a function called "claims" in the same dropdown menu &mdash; be sure that you have
 					selected "claim".
 				</p>
 			</div>
@@ -154,7 +154,8 @@
 			<div class="col-12 col-lg-6 mb-3 pr-lg-5">
 				<h2 class="text-white mb-3">Entering inputs</h2>
 				<p>
-					Enter the address of the Ethereum account that holds the balance of dot allocation you are going to claim.
+					Enter the address of the Ethereum account that holds the balance of dot allocation you are going to claim into
+					the field labeled "_eth address".
 				</p>
 				<p>
 					The Ethereum address for your claim is usually the same address that you are planning to send the
@@ -176,9 +177,9 @@
 			<div class="col-12 col-lg-6 mb-3 pr-lg-5">
 				<h2 class="text-white mb-3">Entering inputs</h2>
 				<p>
-					For the public key field you will use the decoded public key of your address. On the next slide enter your
-					Polkadot address into the decoder to get your raw public key. Copy the key to your clipboard and paste it into
-					MyCrypto.
+					On the next slide enter your Polkadot address into the decoder to get your raw public key (pubKey). You will
+					then enter this public key of your Polkadot address into the field labeled "_pubKey". Copy the key to your
+					clipboard and paste it into MyCrypto.
 				</p>
 			</div>
 			<div class="col-12 col-lg-6 slider-img-wrapper">
@@ -192,7 +193,19 @@
 
 	<div>
 		<div id="get-decoded-pubkey" class="row mb-5">
-			<h2 class="col-12 text-white mb-5">Get your public key</h2>
+			<h2 class="col-12 text-white mb-3">Get your public key</h2>
+			<div class="col-12 col-lg-6 pr-lg-4">
+				<p>
+					Please enter your Polkadot mainnet address - this address should start with a "1". If your address does not
+					start with a "1", it is specifying a different network, but you can still use your public key.
+				</p>
+			</div>
+			<div class="col-12 col-lg-6 pr-lg-4 mb-3">
+				<p>
+					Follow the instructions here (#get-converted-address) to convert. If you paste in a non-Polkadot address, the
+					decoder will not work and you will continue to see "unknown".
+				</p>
+			</div>
 			<div class="col-12">
 				<input type='text' class="dashboard-input mb-5" onchange="window.getPubkey(); " onkeyup="this.onchange();"
 					onpaste="this.onchange();" oninput="this.onchange();" id="dot-addr-inp"
