@@ -177,19 +177,12 @@
 			<div class="col-12 col-lg-6 mb-3 pr-lg-5">
 				<h2 class="text-white mb-3">Entering inputs</h2>
 				<p>
-					On the next slide enter your Polkadot address into the decoder to get your raw public key (pubKey). You will
-					then enter this public key of your Polkadot address into the field labeled "_pubKey". Copy the key to your
-					clipboard and paste it into MyCrypto.
-				</p>
-				<p class="text-primary">
-					<code class="bg-black">WARNING:</code> You must enter your PUBLIC KEY here which you will get from the next
-					slide. DO NOT enter your Polkadot address! If you enter your address into the pubKey field, your dots will not
-					be accessible!
+					On the next slide you will find instructions how to get your public key (pubKey).
 				</p>
 			</div>
 			<div class="col-12 col-lg-6 slider-img-wrapper">
 				<div id="sA_8" class="slider-img">
-					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/slider/MyCrypto_07.jpg">
+					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/slider/MyCrypto_07_empty.jpg">
 					<div class="dot"></div>
 				</div>
 			</div>
@@ -202,13 +195,17 @@
 			<div class="col-12 col-lg-6 pr-lg-4">
 				<p>
 					Please enter your Polkadot mainnet address - this address should start with a "1". If your address does not
-					start with a "1", it is specifying a different network, but you can still use your public key.
+					start with a "1", it is specifying a different network. Follow the instructions <a href="#wallet-create"
+						class="jsGetConvertedAddress">here</a> to convert your address.
 				</p>
 			</div>
 			<div class="col-12 col-lg-6 pr-lg-4 mb-5">
+				<p class="text-primary">
+					<code class="bg-black">WARNING:</code> If you paste in a non-Polkadot address, the decoder will not work and
+					you will continue to see "unknown".
+				</p>
 				<p>
-					Follow the instructions <a href="#wallet-create" class="jsGetConvertedAddress">here</a> to convert. If you
-					paste in a non-Polkadot address, the decoder will not work and you will continue to see "unknown".
+					Copy your decode public key to your clipboard and continue to the next slide.
 				</p>
 			</div>
 			<div class="col-12">
@@ -228,6 +225,27 @@
 						</svg>
 						<span>Copy</span>
 					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<div class="row mb-5">
+			<div class="col-12 col-lg-6 mb-3 pr-lg-5">
+				<h2 class="text-white mb-3">Entering inputs</h2>
+				<p>
+					Enter your decoded public key of your Polkadot address into the field labeled "_pubKey".
+				</p>
+				<p class="text-primary">
+					<code class="bg-black">WARNING:</code> You must enter your PUBLIC KEY here. DO NOT enter your Polkadot
+					address! If you enter your Polkadot address into the "_pubKey" field, your dots will not be accessible!
+				</p>
+			</div>
+			<div class="col-12 col-lg-6 slider-img-wrapper">
+				<div id="sA_8" class="slider-img">
+					<img class="tns-lazy-img" data-src="{{site.baseurl}}/assets/images/slider/MyCrypto_07.jpg">
+					<div class="dot"></div>
 				</div>
 			</div>
 		</div>
