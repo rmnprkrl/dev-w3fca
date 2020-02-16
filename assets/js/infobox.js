@@ -18,6 +18,15 @@ const FrozenTokenArtifact = require('../contracts/FrozenToken.json');
 const CLAIMS_ADDRESS = '0xa2CBa0190290aF37b7e154AEdB06d16100Ff5907';
 const FROZENTOKEN_ADDRESS = '0xb59f67A8BfF5d8Cd03f6AC17265c550Ed8F33907';
 
+const noClaimText = () => {
+  document.getElementById('eth-address').innerHTML = 'No Claims for this address.';
+  document.getElementById('pd-address').innerHTML = 'No Claims for this address.';
+  document.getElementById('pubkey').innerHTML = 'No Claims for this address.';
+  document.getElementById('index').innerHTML = 'No Claims for this address.';
+  document.getElementById('balance').innerHTML = '0';
+  document.getElementById('vesting').innerHTML = 'No Claims for this address.';
+}
+
 console.log('contracts instantiated');
 
 const w3 = new Web3(new Web3.providers.WebsocketProvider("wss://mainnet.infura.io/ws/v3/d2e0f554436c4ec595954c34d9fecdb7"));
@@ -278,7 +287,13 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
 const getPolkadotData = async (pubkey, claims, frozenToken) => {
   const zeroAddress = '0x' + '00'.repeat(20);
 
-  let claimsForPubkey = await claims.methods.claimsForPubkey(pubkey, 0).call();
+  let claimsForPubkey;
+  try {
+    claimsForPubkey = await claims.methods.claimsForPubkey(pubkey, 0).call();
+  } catch (err) {
+    noClaimText();
+    removeClassWaiting('claim-verify');
+  }
   let accumulated = await getEthereumData(claimsForPubkey, claims, frozenToken, true);
   let counter = 0;
   while (claimsForPubkey != zeroAddress) {
