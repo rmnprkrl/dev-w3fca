@@ -12,11 +12,18 @@ setSS58Format(0);
 const ClaimsArtifact = require('../contracts/Claims.json');
 const FrozenTokenArtifact = require('../contracts/FrozenToken.json');
 
-// const GOERLI_CLAIMS_ADDRESS = '0x46f8131Dd26E59F1f81299A8702B7cA3bD2B2535';
-// const GOERLI_FROZENTOKEN_ADDRESS = '0xe4915b22A00f293ed49AeA9aD97738dE8BfB3949';
-
-const CLAIMS_ADDRESS = '0xa2CBa0190290aF37b7e154AEdB06d16100Ff5907';
-const FROZENTOKEN_ADDRESS = '0xb59f67A8BfF5d8Cd03f6AC17265c550Ed8F33907';
+const Config = {
+  mainnet: {
+    infura: 'wss://mainnet.infura.io/ws/v3/d2e0f554436c4ec595954c34d9fecdb7',
+    claims: '0xa2CBa0190290aF37b7e154AEdB06d16100Ff5907',
+    frozenToken: '0xb59f67A8BfF5d8Cd03f6AC17265c550Ed8F33907',
+  },
+  testnet: {
+    infura: 'wss://goerli.infura.io/ws/v3/7121204aac9a45dcb9c2cc825fb85159',
+    claims: '0x46f8131Dd26E59F1f81299A8702B7cA3bD2B2535',
+    frozenToken: '0xe4915b22A00f293ed49AeA9aD97738dE8BfB3949',
+  }
+}
 
 const noClaimText = () => {
   document.getElementById('eth-address').innerHTML = 'No Claims for this address.';
@@ -27,37 +34,51 @@ const noClaimText = () => {
   document.getElementById('vesting').innerHTML = 'No Claims for this address.';
 }
 
-console.log('contracts instantiated');
-
-const w3 = new Web3(new Web3.providers.WebsocketProvider("wss://mainnet.infura.io/ws/v3/d2e0f554436c4ec595954c34d9fecdb7"));
-w3.eth.getBlockNumber().then((Res) => {
-    console.log(Res);
-});
-
-const frozenToken = new w3.eth.Contract(FrozenTokenArtifact.abi, FROZENTOKEN_ADDRESS);
-const claims = new w3.eth.Contract(ClaimsArtifact.abi, CLAIMS_ADDRESS);
-
-claims.methods.claimedLength().call((err, res) => {
-  if (err) {
-    console.log(err);
-    return;
+const handleToggle = (box) => {
+  if (box.checked) {
+    instantiateContracts('testnet');
+  } else {
+    instantiateContracts();
   }
-  document.getElementById('total-claims').innerHTML = res;
-})
+}
 
-claims.methods.nextIndex().call((err, res) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
+const instantiateContracts = (network = 'mainnet') => {
+  console.log(`instantiating contracts for ${network}`);
 
-  const registry = new TypeRegistry();
-  const m = createType(registry, 'AccountIndex', Number(res));
-  document.getElementById('next-index').innerHTML = `${m.toString()}`;
-})
+  const config = Config[network];
+  const w3 = new Web3(new Web3.providers.WebsocketProvider(config.infura));
+  const frozenToken = new w3.eth.Contract(FrozenTokenArtifact.abi, config.frozenToken);
+  const claims = new w3.eth.Contract(ClaimsArtifact.abi, config.claims);
 
-document.getElementById('claims-address').innerHTML = CLAIMS_ADDRESS;
-document.getElementById('contract-abi').innerHTML = JSON.stringify(ClaimsArtifact.abi);
+  claims.methods.claimedLength().call((err, res) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    document.getElementById('total-claims').innerHTML = res;
+  })
+  
+  claims.methods.nextIndex().call((err, res) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+  
+    const registry = new TypeRegistry();
+    const m = createType(registry, 'AccountIndex', Number(res));
+    document.getElementById('next-index').innerHTML = `${m.toString()}`;
+  })
+  
+  document.getElementById('contract-abi').innerHTML = JSON.stringify(ClaimsArtifact.abi);  
+  document.getElementById('claims-address').innerHTML = config.claims;
+
+  window.w3 = w3;
+  window.claims = claims;
+  window.frozenToken = frozenToken;
+  console.log('instantiated contracts for', network);
+}
+
+instantiateContracts();
 
 const validAddress = async () => {
   let { value } = document.getElementById('validity-input');
@@ -66,6 +87,8 @@ const validAddress = async () => {
 		removeClassVerified('verify-ethereum-address');
 			return;
   }
+
+  const { claims, frozenToken } = window;
 
   if (!frozenToken || !claims) {
     console.log('Contracts are not instatiated. There is likely a problem with the Node connection.');
@@ -140,6 +163,7 @@ const check = async () => {
     return;
   }
 
+  const { claims, frozenToken } = window;
   if (!frozenToken || !claims) {
     console.log('Contracts are not instatiated. There is likely a problem with the Node connection.');
     return;
@@ -316,6 +340,6 @@ const getPolkadotData = async (pubkey, claims, frozenToken) => {
 
 window.infoBoxChecker = check;
 window.validAddress = validAddress;
-
+window.handleToggle = handleToggle;
 
 // npx browserify infobox.js > infobox-browser.js; npx uglify-es --mangle --compress -- infobox-browser.js > infobox.min.js; rm infobox-browser.js
