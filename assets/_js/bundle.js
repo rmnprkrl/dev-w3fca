@@ -1,6 +1,7 @@
 'use strict';
 
 require('expose-loader?$!jquery');
+
 import AOS from 'aos';
 import 'bootstrap';
 import ClipboardJS from 'clipboard/dist/clipboard.js';
