@@ -42,6 +42,20 @@ const handleToggle = (box) => {
   }
 }
 
+const detectASCII = (pubkey) => {
+  let chars = [];
+  for (let i = 0; i < pubkey.length; i+=2) {
+    const cur = pubkey.slice(i, i+2);
+    if (cur === '0x') continue;
+    else chars.push(String.fromCharCode('0x'+ cur));
+  }
+
+		const maybeAddress = chars.join('');
+		const isASCII = /^[a-z0-9]+$/i.test(maybeAddress);
+
+		return isASCII;
+}
+
 const instantiateContracts = (network = 'mainnet') => {
   console.log(`instantiating contracts for ${network}`);
 
@@ -292,6 +306,10 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
   if (pubKey == '0x0000000000000000000000000000000000000000000000000000000000000000') {
     ethData.index = 'None';
     ethData.pubkey = 'Not claimed';
+    ethData.pdAddress = 'Not claimed';
+  } else if (detectASCII(pubKey)) {
+    ethData.index  = 'None';
+    ethData.pubkey = "We've detected an invalid claim. You will be able to make a new claim after Polkadot launch by signing a message from your Ethereum address.";
     ethData.pdAddress = 'Not claimed';
   } else {
     const registry = new TypeRegistry();
