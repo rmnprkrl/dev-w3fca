@@ -85,40 +85,74 @@ const sliderA = tns({
 	autoHeight: false
 });
 
+slider.events.on('indexChanged', function() {
+	updateSliderNav(slider, 'jsSliderGoTo');
+});
+
+sliderA.events.on('indexChanged', function() {
+	updateSliderNav(sliderA, 'jsSliderGoToA');
+});
+
+const updateSliderNav = (slider, navClass) => {
+	let indexCurrent = slider.getInfo().index;
+	$('.' + navClass + '.jsActive').removeClass('active');
+	$('.' + navClass + '.jsActive')
+		.eq(indexCurrent)
+		.addClass('active');
+};
+
 $(document).ready(function() {
 	$('.jsSliderGoTo').click(function() {
 		let sliderIndex = $(this).data('slider') - 1;
 		slider.goTo(sliderIndex);
-		let index = slider.getInfo().index;
-		$('.jsSliderGoTo.jsActive').removeClass('active');
-		$('.jsSliderGoTo.jsActive')
-			.eq(index)
-			.addClass('active');
 	});
 
 	$('.jsSliderGoToA').click(function() {
 		let sliderIndex = $(this).data('slider') - 1;
 		sliderA.goTo(sliderIndex);
-		let index = sliderA.getInfo().index;
-		$('.jsSliderGoToA.jsActive').removeClass('active');
-		$('.jsSliderGoToA.jsActive')
-			.eq(index)
-			.addClass('active');
-	});
-
-	$('.jsGetConvertedAddress').click(function() {
-		slider.goTo(0);
-		sliderInnerPolkadotJsPlugin.goTo(10);
 	});
 });
 
+document.querySelector('.jsGetConvertedAddress').onclick = function() {
+	slider.goTo(0);
+	sliderInnerPolkadotJsPlugin.goTo(10);
+};
+
+let hash = window.location.hash.replace('#', '');
+
 window.onload = function() {
-	let hash = window.location.hash.replace('#', '');
-	if (hash == 'get-converted-address') {
+	if (hash == 'generate-polkadot-address-guide-polkadot_js-plugin') {
+		slider.goTo(0);
+	}
+
+	if (hash == 'generate-polkadot-address-guide-subkey') {
+		slider.goTo(1);
+	}
+
+	if (hash == 'generate-polkadot-address-guide-polkadot_js') {
+		slider.goTo(2);
+	}
+
+	if (hash == 'generate-polkadot-address-guide-coinbase') {
+		slider.goTo(3);
+	}
+
+	if (
+		hash == 'get-converted-address' ||
+		hash == 'generate-polkadot-address-guide-polkadot_js-plugin-convert-address'
+	) {
 		$.smoothScroll({
-			scrollTarget: '#wallet-create'
+			scrollTarget: '#generate-polkadot-address-guide'
 		});
 		slider.goTo(0);
 		sliderInnerPolkadotJsPlugin.goTo(10);
+	}
+
+	if (hash == 'claim-guide-mycrypto-gas-limit') {
+		$.smoothScroll({
+			scrollTarget: '#claim-guide'
+		});
+		sliderA.goTo(0);
+		sliderInnerMycrypto.goTo(11);
 	}
 };

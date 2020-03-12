@@ -166,6 +166,10 @@ code {
 	color: $black !important;
 }
 
+.text-gray {
+	color: dimgrey !important;
+}
+
 .abi-textarea {
 	@extend code;
 

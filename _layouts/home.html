@@ -36,10 +36,7 @@ layout: default
 			<div class="col-md-12 col-lg-12 pt-2 pb-4">
 				<div class="display-4 mb-2 opacity-70 text-white" data-aos="slide-up" data-aos-once="false">Step 1</div>
 				<h2 class="display-4 text-white mb-3 mb-md-5">Check Your Ethereum <br>Address</h2>
-				<input class="dashboard-input mb-3 mb-md-5" placeholder="Paste your Ethereum address"
-					onfocus="this.placeholder=''" onblur="this.placeholder='Paste your Ethereum address'"
-					onchange="window.validAddress();" onkeyup="this.onchange();" onpaste="this.onchange();"
-					oninput="this.onchange();" id="validity-input">
+				<input class="dashboard-input mb-3 mb-md-5" placeholder="Paste your Ethereum address" onfocus="this.placeholder=''" onblur="this.placeholder='Paste your Ethereum address'" onchange="window.validAddress();" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();" id="validity-input">
 
 				<div class="dashboard-output mt-2 w-85">
 					<div class="dashboard-output-group">
@@ -48,31 +45,30 @@ layout: default
 					</div>
 				</div>
 
-				<a href="#wallet" class="slider-arrow-down slider-arrow-down--ethereum"><i
-						class="material-icons">arrow_downward</i></a>
+				<a href="#generate-polkadot-address" class="slider-arrow-down slider-arrow-down--ethereum"><i class="material-icons">arrow_downward</i></a>
 
 			</div>
 		</div>
 	</div>
 </section>
 
-<section id="wallet" class="bg-white">
+<section id="generate-polkadot-address" class="bg-white">
 	<div class="container">
 		{%- include wallet.html -%}
 	</div>
-	<span id="wallet-create"></span>
+	<span id="generate-polkadot-address-guide"></span>
+	<span id="generate-polkadot-address-guide-polkadot_js-plugin"></span>
+	<span id="generate-polkadot-address-guide-subkey"></span>
+	<span id="generate-polkadot-address-guide-polkadot_js"></span>
+	<span id="generate-polkadot-address-guide-coinbase"></span>
 </section>
 
 <section class="bg-dark pt-3 pt-md-3 pt-lg-0">
 	<div class="container pb-0">
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive active"
-			data-slider="1">polkadot.js browser plugin</button>
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive"
-			data-slider="2">subkey</button>
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive"
-			data-slider="3">polkadot.js</button>
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive"
-			data-slider="4">Coinbase</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive active" data-slider="1">polkadot.js browser plugin</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="2">subkey</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="3">polkadot.js</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="4">Coinbase</button>
 		<button class="btn mt-lg-minus-3 mr-1 mr-lg-2 mb-2" disabled>Parity Signer</button>
 	</div>
 	<div class="slider text-white">
@@ -120,8 +116,7 @@ layout: default
 			</div>
 			<div class="col-12 col-md-6 col-lg-6 mb-4">
 				<p>
-					If you don’t have a Polkadot address, you will need to generate one. You can generate a Polkadot address in <a
-						href="#wallet">Step 2</a>.
+					If you don’t have a Polkadot address, you will need to generate one. You can generate a Polkadot address in <a href="#generate-polkadot-address">Step 2</a>.
 				</p>
 				<p>
 					When you make a claim, you will be assigned an index as well. This index is a short code &mdash; 6 characters
@@ -136,13 +131,13 @@ layout: default
 			</div>
 		</div>
 	</div>
-	<span id="claim-process"></span>
+	<span id="claim-guide"></span>
+	<span id="claim-guide-mycrypto"></span>
 </section>
 
 <section class="bg-dark pt-3 pt-md-3 pt-lg-0">
 	<div class="container pb-0">
-		<button
-			class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoToA jsActive active">MyCrypto</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoToA jsActive active">MyCrypto</button>
 	</div>
 	<div class="slider sliderA text-white">
 		<div>
@@ -165,8 +160,7 @@ layout: default
 					<h2 id="claim-verify-heading" class="display-4 text-white mb-3 mb-md-5"><span>Verify Your Claim</spa>
 					</h2>
 					<div class="animation-wait">
-						<svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-							x="0px" y="0px" viewBox="0 0 12 12" enable-background="new 0 0 0 0" xml:space="preserve" class="wait">
+						<svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12 12" enable-background="new 0 0 0 0" xml:space="preserve" class="wait">
 							<circle fill="#fff" stroke="none" cx="6" cy="6" r="6">
 								<animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" />
 							</circle>
@@ -177,10 +171,7 @@ layout: default
 							<path d="M0.3 96l62.4 54.1L165.6 0.3" /></svg>
 					</div>
 				</div>
-				<input class="dashboard-input mb-3 mb-md-5" onchange="window.infoBoxChecker();" onkeyup="this.onchange();"
-					onpaste="this.onchange();" oninput="this.onchange();" id="address-input"
-					placeholder="Paste your Polkadot address" onfocus="this.placeholder=''"
-					onblur="this.placeholder='Paste your Polkadot address'" />
+				<input class="dashboard-input mb-3 mb-md-5" onchange="window.infoBoxChecker();" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();" id="address-input" placeholder="Paste your Polkadot address" onfocus="this.placeholder=''" onblur="this.placeholder='Paste your Polkadot address'" />
 
 				<div class="dashboard-output mt-2">
 					<div class="dashboard-output-group">
@@ -227,10 +218,8 @@ layout: default
 				Any other questions?
 			</div>
 			<div class="col-12 text-center" data-aos="fade-up">
-				<a href="mailto:dots@polkadot.network" class="btn btn-lg btn-primary mt-3 mx-md-1 px-4" target="_blank"
-					rel="noopener noreferrer">Email Us</a>
-				<a href="https://riot.im/app/#/room/!kwIkVteRpPRjjTyvTe:web3.foundation?via=web3.foundation"
-					class="btn btn-lg btn-primary mt-3 mx-md-1" target="_blank" rel="noopener noreferrer">Riot
+				<a href="mailto:dots@polkadot.network" class="btn btn-lg btn-primary mt-3 mx-md-1 px-4" target="_blank" rel="noopener noreferrer">Email Us</a>
+				<a href="https://riot.im/app/#/room/!kwIkVteRpPRjjTyvTe:web3.foundation?via=web3.foundation" class="btn btn-lg btn-primary mt-3 mx-md-1" target="_blank" rel="noopener noreferrer">Riot
 					Channel</a>
 			</div>
 		</div>
