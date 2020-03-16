@@ -92,7 +92,10 @@ var klaroConfig = {
 				// is not the current domain. If you do not set these values
 				// properly, the cookie can't be deleted by Klaro
 				// (there is no way to access the path or domain of a cookie in JS)
-				['_ga', '_gat_gtag_UA-103354191-1', '_gid'] //for the production version
+				[/^_ga.*$/, '/', '.polkadot.network'], //for the production version
+				[/^_ga.*$/, '/', '.localhost'], //for the production version
+				['_gid', '/', '.polkadot.network'], //for the production version
+				['_gid', '/', 'localhost'] //for the local version
 			],
 
 			// If "required" is set to true, Klaro will not allow this app to
