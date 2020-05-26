@@ -3,6 +3,17 @@ body {
 	background: white;
 }
 
+body.freeze-page .page-wrapper {
+	@media only screen and (min-width: 992px) {
+		height: 100vh;
+		overflow: auto;
+	}
+
+	&::before {
+		content: none;
+	}
+}
+
 main.page-wrapper {
 	background: transparent;
 

@@ -10,11 +10,11 @@ AOS.init({
 	duration: 1100,
 	once: true,
 	disable: false,
-	startEvent: 'load'
+	startEvent: 'load',
 });
 
 document.addEventListener('aos:in:step-checker', ({ detail }) => {
-	setTimeout(function() {
+	setTimeout(() => {
 		document
 			.querySelector('.process-overview-line-progress')
 			.classList.add('visible');
@@ -23,11 +23,11 @@ document.addEventListener('aos:in:step-checker', ({ detail }) => {
 
 const clipboard = new ClipboardJS('.btn-clipboard');
 
-clipboard.on('success', function(e) {
+clipboard.on('success', (e) => {
 	let buttonText = e.trigger.children[1];
 	buttonText.innerHTML = 'Copied';
 
-	setTimeout(function() {
+	setTimeout(() => {
 		buttonText.innerHTML = 'Copy';
 		if (document.activeElement != document.body) document.activeElement.blur();
 	}, 600);
@@ -36,5 +36,5 @@ clipboard.on('success', function(e) {
 });
 
 import './scroll.js';
-import './slider.js';
 import './header.js';
+// import './slider.js';
