@@ -140,58 +140,15 @@ layout: default
 	</div>
 </section>
 
-<script src="assets/js/infobox.min.js"></script>
-<script src="assets/js/pubkey.min.js"></script>
-
-<section id="claim-verify" class="bg-primary">
+<section class="bg-primary">
 	<div class="container height-40">
 		<div class="row justify-content-center">
 			<div class="col-md-12 col-lg-12 pt-2 pb-4">
 				<div class="display-4 mb-2 opacity-70 text-white" data-aos="slide-up" data-aos-once="false">Step 4</div>
 				<div class="position-relative">
-					<h2 id="claim-verify-heading" class="display-4 text-white mb-3 mb-md-5"><span>Verify Your Claim</spa>
+					<h2 id="claim-verify-heading" class="display-4 text-white mb-3 mb-md-5"><span>Attesting to a Statement</spa>
 					</h2>
-					<div class="animation-wait">
-						<svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12 12" enable-background="new 0 0 0 0" xml:space="preserve" class="wait">
-							<circle fill="#fff" stroke="none" cx="6" cy="6" r="6">
-								<animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" />
-							</circle>
-						</svg>
-					</div>
-					<div class="animation-check">
-						<svg xmlns="http://www.w3.org/2000/svg" class="check" width="166" height="151" viewBox="0 0 166 150.9">
-							<path d="M0.3 96l62.4 54.1L165.6 0.3" /></svg>
-					</div>
 				</div>
-				<input class="dashboard-input mb-3 mb-md-5" onchange="window.infoBoxChecker();" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();" id="address-input" placeholder="Paste your Polkadot address" onfocus="this.placeholder=''" onblur="this.placeholder='Paste your Polkadot address'" />
-
-				<div class="dashboard-output mt-2">
-					<div class="dashboard-output-group">
-						<div class="dashboard-output-name">Allocation Address:</div>
-						<div class="dashboard-output-value"><span id="eth-address">unknown</span></div>
-					</div>
-					<div class="dashboard-output-group">
-						<div class="dashboard-output-name">Polkadot Address:</div>
-						<div class="dashboard-output-value"><span id="pd-address">none</span></div>
-					</div>
-					<div class="dashboard-output-group">
-						<div class="dashboard-output-name">Public Key:</div>
-						<div class="dashboard-output-value"><span id="pubkey">none</span></div>
-					</div>
-					<div class="dashboard-output-group">
-						<div class="dashboard-output-name">Index:</div>
-						<div class="dashboard-output-value"><span id="index">none</span></div>
-					</div>
-					<div class="dashboard-output-group">
-						<div class="dashboard-output-name">Vesting:</div>
-						<div class="dashboard-output-value"><span id='vesting'>none</span></div>
-					</div>
-					<div class="dashboard-output-group">
-						<div class="dashboard-output-name">Balance:</div>
-						<div class="dashboard-output-value"><span id="balance">0</span> DOT</div>
-					</div>
-				</div>
-
 			</div>
 		</div>
 	</div>

@@ -37,4 +37,4 @@ clipboard.on('success', (e) => {
 
 import './scroll.js';
 import './header.js';
-// import './slider.js';
+import './slider.js';

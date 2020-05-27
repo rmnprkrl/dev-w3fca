@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
 
 import { tns } from 'tiny-slider/src/tiny-slider';
 
@@ -16,7 +17,7 @@ const sliderInnerPolkadotJsPlugin = tns({
 	autoplay: false,
 	loop: false,
 	lazyload: true,
-	autoHeight: false
+	autoHeight: false,
 });
 
 const sliderInnerPolkadotJs = tns({
@@ -33,7 +34,7 @@ const sliderInnerPolkadotJs = tns({
 	autoplay: false,
 	loop: false,
 	lazyload: true,
-	autoHeight: false
+	autoHeight: false,
 });
 
 const slider = tns({
@@ -48,7 +49,7 @@ const slider = tns({
 	loop: false,
 	speed: 600,
 	lazyload: true,
-	autoHeight: false
+	autoHeight: false,
 });
 
 // sliderA
@@ -67,7 +68,7 @@ const sliderInnerMycrypto = tns({
 	autoplay: false,
 	loop: false,
 	lazyload: true,
-	autoHeight: false
+	autoHeight: false,
 });
 
 const sliderA = tns({
@@ -82,14 +83,14 @@ const sliderA = tns({
 	loop: false,
 	speed: 600,
 	lazyload: true,
-	autoHeight: false
+	autoHeight: false,
 });
 
-slider.events.on('indexChanged', function() {
+slider.events.on('indexChanged', () => {
 	updateSliderNav(slider, 'jsSliderGoTo');
 });
 
-sliderA.events.on('indexChanged', function() {
+sliderA.events.on('indexChanged', () => {
 	updateSliderNav(sliderA, 'jsSliderGoToA');
 });
 
@@ -101,26 +102,21 @@ const updateSliderNav = (slider, navClass) => {
 		.addClass('active');
 };
 
-$(document).ready(function() {
-	$('.jsSliderGoTo').click(function() {
+$(document).ready(() => {
+	$('.jsSliderGoTo').click(() => {
 		let sliderIndex = $(this).data('slider') - 1;
 		slider.goTo(sliderIndex);
 	});
 
-	$('.jsSliderGoToA').click(function() {
+	$('.jsSliderGoToA').click(() => {
 		let sliderIndex = $(this).data('slider') - 1;
 		sliderA.goTo(sliderIndex);
 	});
 });
 
-document.querySelector('.jsGetConvertedAddress').onclick = function() {
-	slider.goTo(0);
-	sliderInnerPolkadotJsPlugin.goTo(10);
-};
-
 let hash = window.location.hash.replace('#', '');
 
-window.onload = function() {
+window.onload = () => {
 	if (hash == 'generate-polkadot-address-guide-polkadot_js-plugin') {
 		slider.goTo(0);
 	}
@@ -142,17 +138,9 @@ window.onload = function() {
 		hash == 'generate-polkadot-address-guide-polkadot_js-plugin-convert-address'
 	) {
 		$.smoothScroll({
-			scrollTarget: '#generate-polkadot-address-guide'
+			scrollTarget: '#generate-polkadot-address-guide',
 		});
 		slider.goTo(0);
 		sliderInnerPolkadotJsPlugin.goTo(10);
-	}
-
-	if (hash == 'claim-guide-mycrypto-gas-limit') {
-		$.smoothScroll({
-			scrollTarget: '#claim-guide'
-		});
-		sliderA.goTo(0);
-		sliderInnerMycrypto.goTo(11);
 	}
 };
