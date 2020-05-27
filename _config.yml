@@ -17,8 +17,8 @@ title: "DOT Claim"
 email: roman@web3.foundation
 description: >- # this means to ignore newlines until "baseurl:"
   Ways To Generate a Polkadot Address
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://claims.polkadot.network" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/dev-w3fca" # the subpath of your site, e.g. /blog
+url: "https://rmnprkrl.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # GA
 google_analytics: UA-103354191-1
