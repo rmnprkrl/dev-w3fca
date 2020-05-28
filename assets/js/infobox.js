@@ -7,6 +7,8 @@ const { addClassVerified, removeClassVerified, addClassWaiting, removeClassWaiti
 const { createType, TypeRegistry } = require('@polkadot/types');
 const { setSS58Format } = require('@polkadot/util-crypto');
 
+const { ApiPromise, WsProvider } = require("@polkadot/api");
+
 setSS58Format(0);
 
 const ClaimsArtifact = require('../contracts/Claims.json');
@@ -25,13 +27,58 @@ const Config = {
   }
 }
 
-const noClaimText = () => {
-  document.getElementById('eth-address').innerHTML = 'No Claims for this address.';
-  document.getElementById('pd-address').innerHTML = 'No Claims for this address.';
-  document.getElementById('pubkey').innerHTML = 'No Claims for this address.';
-  document.getElementById('index').innerHTML = 'No Claims for this address.';
-  document.getElementById('balance').innerHTML = '0';
-  document.getElementById('vesting').innerHTML = 'No Claims for this address.';
+async function hasClaimedOnPd(addr) {
+  console.log("being called with ", addr)
+
+  const api = await ApiPromise.create({
+    provider: new WsProvider("wss://rpc.polkadot.io"),
+  });
+
+  let claim;
+  if (addr.startsWith("0x")) {
+    claim = await api.query.claims.claims(addr);
+  } else {
+    const ethAddr = await api.query.claims.preclaims(addr);
+    claim = await api.query.claims.claims(ethAddr.toString());
+  }
+
+  if (Number(claim.toString()) !== 0) {
+    return true;
+  }
+
+  return false;
+}
+
+const noClaimText = async (pubkey) => {
+  addClassWaiting('claim-verify');
+
+  const addr = encodeAddress(pUtil.hexToU8a(pubkey), 0);
+
+  const api = await ApiPromise.create({
+    provider: new WsProvider("wss://rpc.polkadot.io"),
+  });
+
+  const attested = await hasClaimedOnPd(addr);
+
+  const ethAddr = await api.query.claims.preclaims(addr);
+
+  let bal = attested
+    ? (await api.query.system.account(addr)).toJSON().data.free/10**12
+    : 0;
+
+  let vesting = attested
+    ? (await api.query.vesting.vesting(addr)).toJSON()
+    : null;
+
+  document.getElementById('eth-address').innerHTML = "There was no claim for this address on Ethereum.";
+  document.getElementById('pd-address').innerHTML = addr;
+  document.getElementById('pubkey').innerHTML = pubkey;
+  document.getElementById('index').innerHTML = "unknown";
+  document.getElementById('balance').innerHTML = bal.toString();
+  document.getElementById('vesting').innerHTML = vesting !== null ? vesting.locked/10**12 : "None";
+  document.getElementById('attested').innerHTML = attested ? "Yes" : "No"
+  removeClassWaiting('claim-verify');
+  if (attested) addClassVerified('claim-verify');
 }
 
 const handleToggle = (box) => {
@@ -80,12 +127,8 @@ const instantiateContracts = (network = 'mainnet') => {
   
     const registry = new TypeRegistry();
     const m = createType(registry, 'AccountIndex', Number(res));
-    document.getElementById('next-index').innerHTML = `${m.toString()}`;
   })
   
-  document.getElementById('contract-abi').innerHTML = JSON.stringify(ClaimsArtifact.abi);  
-  document.getElementById('claims-address').innerHTML = config.claims;
-
   window.w3 = w3;
   window.claims = claims;
   window.frozenToken = frozenToken;
@@ -199,6 +242,15 @@ const check = async () => {
     ? await getEthereumData(value, claims, frozenToken)
     : await getPolkadotData(value, claims, frozenToken);
 
+  const { pdAddress, original, pubkey } = results;
+
+  let attested = false;
+  if ((pdAddress.toLowerCase() !== 'none' && pdAddress.toLowerCase() !== 'not claimed')) {
+    attested = await hasClaimedOnPd(pdAddress);
+  } else if (pdAddress.toLowerCase("not claimed") && typeof original !== 'string') {
+    attested = await hasClaimedOnPd(original[0])
+  }
+
   if (results.noBalance) {
 		console.log("This account does not have balance. Are you sure you're using the right address?");
 		removeClassWaiting('claim-verify');
@@ -206,11 +258,12 @@ const check = async () => {
   } else {
     // console.log('results', results);
     document.getElementById('eth-address').innerHTML = results.original == 'None' ? 'None' : results.original.join(', ');
-    document.getElementById('pd-address').innerHTML = results.pdAddress;
-    document.getElementById('pubkey').innerHTML = results.pubkey;
+    document.getElementById('pd-address').innerHTML = (attested && pdAddress.toLowerCase() === "not claimed") ? "Claimed on Polkadot": pdAddress;
+    document.getElementById('pubkey').innerHTML = (attested && pubkey.toLowerCase() === 'not claimed') ? "Claimed on Polkadot": pubkey;
     document.getElementById('index').innerHTML = results.index;
     document.getElementById('balance').innerHTML = results.balance / 1000;
-		document.getElementById('vesting').innerHTML = results.vesting ? results.vesting/1000 + ' DOT' : 'None';
+    document.getElementById('vesting').innerHTML = results.vesting ? results.vesting/1000 + ' DOT' : 'None';
+    document.getElementById('attested').innerHTML = attested ? "Yes" : "No"
 		removeClassWaiting('claim-verify');
 		addClassVerified('claim-verify');
   }
@@ -333,8 +386,7 @@ const getPolkadotData = async (pubkey, claims, frozenToken) => {
   try {
     claimsForPubkey = await claims.methods.claimsForPubkey(pubkey, 0).call();
   } catch (err) {
-    noClaimText();
-    removeClassWaiting('claim-verify');
+    noClaimText(pubkey);
   }
   let accumulated = await getEthereumData(claimsForPubkey, claims, frozenToken, true);
   let counter = 0;
