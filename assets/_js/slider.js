@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
+/* eslint-disable space-before-function-paren */
 
 import { tns } from 'tiny-slider/src/tiny-slider';
 
@@ -86,15 +86,53 @@ const sliderA = tns({
 	autoHeight: false,
 });
 
-slider.events.on('indexChanged', () => {
+// sliderB
+
+const sliderInnerAttest = tns({
+	container: '#nested_inner_attest',
+	mode: 'gallery',
+	items: 1,
+	nested: 'inner',
+	slideBy: 'page',
+	speed: 400,
+	controls: true,
+	nav: true,
+	navPosition: 'bottom',
+	controlsPosition: 'bottom',
+	autoplay: false,
+	loop: false,
+	lazyload: true,
+	autoHeight: false,
+});
+
+const sliderB = tns({
+	container: '.sliderB',
+	mode: 'carousel',
+	nested: 'outer',
+	items: 1,
+	slideBy: 'page',
+	autoplay: false,
+	controls: false,
+	nav: false,
+	loop: false,
+	speed: 600,
+	lazyload: true,
+	autoHeight: false,
+});
+
+slider.events.on('indexChanged', function () {
 	updateSliderNav(slider, 'jsSliderGoTo');
 });
 
-sliderA.events.on('indexChanged', () => {
+sliderA.events.on('indexChanged', function () {
 	updateSliderNav(sliderA, 'jsSliderGoToA');
 });
 
-const updateSliderNav = (slider, navClass) => {
+sliderB.events.on('indexChanged', function () {
+	updateSliderNav(sliderB, 'jsSliderGoToB');
+});
+
+const updateSliderNav = function (slider, navClass) {
 	let indexCurrent = slider.getInfo().index;
 	$('.' + navClass + '.jsActive').removeClass('active');
 	$('.' + navClass + '.jsActive')
@@ -102,21 +140,26 @@ const updateSliderNav = (slider, navClass) => {
 		.addClass('active');
 };
 
-$(document).ready(() => {
-	$('.jsSliderGoTo').click(() => {
+$(document).ready(function () {
+	$('.jsSliderGoTo').click(function () {
 		let sliderIndex = $(this).data('slider') - 1;
 		slider.goTo(sliderIndex);
 	});
 
-	$('.jsSliderGoToA').click(() => {
+	$('.jsSliderGoToA').click(function () {
 		let sliderIndex = $(this).data('slider') - 1;
 		sliderA.goTo(sliderIndex);
+	});
+
+	$('.jsSliderGoToB').click(function () {
+		let sliderIndex = $(this).data('slider') - 1;
+		sliderB.goTo(sliderIndex);
 	});
 });
 
 let hash = window.location.hash.replace('#', '');
 
-window.onload = () => {
+window.onload = function () {
 	if (hash == 'generate-polkadot-address-guide-polkadot_js-plugin') {
 		slider.goTo(0);
 	}
