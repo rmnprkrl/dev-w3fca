@@ -78,7 +78,7 @@ const noClaimText = async (pubkey) => {
   document.getElementById('vesting').innerHTML = vesting !== null ? vesting.locked/10**12 : "None";
   document.getElementById('attested').innerHTML = attested ? "Yes" : "No"
   removeClassWaiting('claim-verify');
-  addClassVerified('claim-verify');
+  if (attested) addClassVerified('claim-verify');
 }
 
 const handleToggle = (box) => {
