@@ -221,7 +221,7 @@ const check = async () => {
     ? await getEthereumData(value, claims, frozenToken)
     : await getPolkadotData(value, claims, frozenToken);
 
-  const { pdAddress, original } = results;
+  const { pdAddress, original, pubkey } = results;
 
   let attested = false;
   if ((pdAddress.toLowerCase() !== 'none' && pdAddress.toLowerCase() !== 'not claimed')) {
@@ -237,8 +237,8 @@ const check = async () => {
   } else {
     // console.log('results', results);
     document.getElementById('eth-address').innerHTML = results.original == 'None' ? 'None' : results.original.join(', ');
-    document.getElementById('pd-address').innerHTML = pdAddress;
-    document.getElementById('pubkey').innerHTML = results.pubkey;
+    document.getElementById('pd-address').innerHTML = (attested && pdAddress.toLowerCase() === "not claimed" ? "Claimed on Polkadot": pdAddress;
+    document.getElementById('pubkey').innerHTML = (attested && pubkey.toLowerCase() === 'not claimed') ? "Claimed on Polkadot": pubkey;
     document.getElementById('index').innerHTML = results.index;
     document.getElementById('balance').innerHTML = results.balance / 1000;
     document.getElementById('vesting').innerHTML = results.vesting ? results.vesting/1000 + ' DOT' : 'None';
