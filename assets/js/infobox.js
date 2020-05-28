@@ -28,7 +28,7 @@ const Config = {
 }
 
 async function hasClaimedOnPd(addr) {
-  console.log("Being called with addr", addr)
+  console.log("being called with ", addr)
 
   const api = await ApiPromise.create({
     provider: new WsProvider("wss://rpc.polkadot.io"),
@@ -36,14 +36,12 @@ async function hasClaimedOnPd(addr) {
 
   let claim;
   if (addr.startsWith("0x")) {
-    console.log(addr);
     claim = await api.query.claims.claims(addr);
   } else {
     const ethAddr = await api.query.claims.preclaims(addr);
     claim = await api.query.claims.claims(ethAddr.toString());
   }
 
-  console.log(claim.toString())
   if (!claim.toString()) {
     return true;
   }
@@ -52,12 +50,12 @@ async function hasClaimedOnPd(addr) {
 }
 
 const noClaimText = () => {
-  document.getElementById('eth-address').innerHTML = 'No Claims for this address.';
-  document.getElementById('pd-address').innerHTML = 'No Claims for this address.';
-  document.getElementById('pubkey').innerHTML = 'No Claims for this address.';
-  document.getElementById('index').innerHTML = 'No Claims for this address.';
+  document.getElementById('eth-address').innerHTML = 'No Claims for this address on Ethereum.';
+  document.getElementById('pd-address').innerHTML = 'No Claims for this address on Ethereum.';
+  document.getElementById('pubkey').innerHTML = 'No Claims for this address on Ethereum.';
+  document.getElementById('index').innerHTML = 'No Claims for this address on Ethereum.';
   document.getElementById('balance').innerHTML = '0';
-  document.getElementById('vesting').innerHTML = 'No Claims for this address.';
+  document.getElementById('vesting').innerHTML = 'No Claims for this address on Ethereum.';
 }
 
 const handleToggle = (box) => {
@@ -205,10 +203,12 @@ const check = async () => {
     return;
   }
 
+  let attested = false;
   if (value.length === 48 || value.length === 47) {
     try {
 			addClassWaiting('claim-verify');
       value = pUtil.u8aToHex(decodeAddress(value, 0));
+      attested = await hasClaimedOnPd(value);
     } catch (err) {
       console.log(err);
 			console.log('error decoding polkadot address', value);
@@ -217,13 +217,16 @@ const check = async () => {
     }
   }
 
+  if (attested) {
+    document.getElementById('attested').innerHTML = attested ? "Yes" : "No"
+  }
+
   const results = value.length === 42
     ? await getEthereumData(value, claims, frozenToken)
     : await getPolkadotData(value, claims, frozenToken);
 
   const { pdAddress, original, pubkey } = results;
 
-  let attested = false;
   if ((pdAddress.toLowerCase() !== 'none' && pdAddress.toLowerCase() !== 'not claimed')) {
     attested = await hasClaimedOnPd(pdAddress);
   } else if (pdAddress.toLowerCase("not claimed") && typeof original !== 'string') {
@@ -237,7 +240,7 @@ const check = async () => {
   } else {
     // console.log('results', results);
     document.getElementById('eth-address').innerHTML = results.original == 'None' ? 'None' : results.original.join(', ');
-    document.getElementById('pd-address').innerHTML = (attested && pdAddress.toLowerCase() === "not claimed" ? "Claimed on Polkadot": pdAddress;
+    document.getElementById('pd-address').innerHTML = (attested && pdAddress.toLowerCase() === "not claimed") ? "Claimed on Polkadot": pdAddress;
     document.getElementById('pubkey').innerHTML = (attested && pubkey.toLowerCase() === 'not claimed') ? "Claimed on Polkadot": pubkey;
     document.getElementById('index').innerHTML = results.index;
     document.getElementById('balance').innerHTML = results.balance / 1000;
