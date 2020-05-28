@@ -42,7 +42,7 @@ async function hasClaimedOnPd(addr) {
     claim = await api.query.claims.claims(ethAddr.toString());
   }
 
-  if (!claim.toString()) {
+  if (Number(claim.toString()) !== 0) {
     return true;
   }
 
@@ -61,7 +61,6 @@ const noClaimText = async (pubkey) => {
   const attested = await hasClaimedOnPd(addr);
 
   const ethAddr = await api.query.claims.preclaims(addr);
-  const claim = await api.query.claims.claims(ethAddr.toString());
 
   let bal = attested
     ? (await api.query.system.account(addr)).toJSON().data.free/10**12
