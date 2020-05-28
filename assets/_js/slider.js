@@ -71,23 +71,6 @@ const sliderInnerMycrypto = tns({
 	autoHeight: false,
 });
 
-const sliderA = tns({
-	container: '.sliderA',
-	mode: 'carousel',
-	nested: 'outer',
-	items: 1,
-	slideBy: 'page',
-	autoplay: false,
-	controls: false,
-	nav: false,
-	loop: false,
-	speed: 600,
-	lazyload: true,
-	autoHeight: false,
-});
-
-// sliderB
-
 const sliderInnerAttest = tns({
 	container: '#nested_inner_attest',
 	mode: 'gallery',
@@ -105,8 +88,8 @@ const sliderInnerAttest = tns({
 	autoHeight: false,
 });
 
-const sliderB = tns({
-	container: '.sliderB',
+const sliderA = tns({
+	container: '.sliderA',
 	mode: 'carousel',
 	nested: 'outer',
 	items: 1,
@@ -128,10 +111,6 @@ sliderA.events.on('indexChanged', function () {
 	updateSliderNav(sliderA, 'jsSliderGoToA');
 });
 
-sliderB.events.on('indexChanged', function () {
-	updateSliderNav(sliderB, 'jsSliderGoToB');
-});
-
 const updateSliderNav = function (slider, navClass) {
 	let indexCurrent = slider.getInfo().index;
 	$('.' + navClass + '.jsActive').removeClass('active');
@@ -149,11 +128,6 @@ $(document).ready(function () {
 	$('.jsSliderGoToA').click(function () {
 		let sliderIndex = $(this).data('slider') - 1;
 		sliderA.goTo(sliderIndex);
-	});
-
-	$('.jsSliderGoToB').click(function () {
-		let sliderIndex = $(this).data('slider') - 1;
-		sliderB.goTo(sliderIndex);
 	});
 });
 

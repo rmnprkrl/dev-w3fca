@@ -125,11 +125,13 @@ layout: default
 	</div>
 	<span id="claim-guide"></span>
 	<span id="claim-guide-mycrypto"></span>
+	<span id="statement-attest"></span>
 </section>
 
 <section class="bg-dark pt-3 pt-md-3 pt-lg-0">
 	<div class="container pb-0">
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoToA jsActive active">MyCrypto</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoToA jsActive active" data-slider="1">Claim</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoToA jsActive" data-slider="2">Attest</button>
 	</div>
 	<div class="slider sliderA text-white">
 		<div>
@@ -137,34 +139,6 @@ layout: default
 				{%- include slider_myCrypto.html -%}
 			</div>
 		</div>
-	</div>
-</section>
-
-<section id="statement-attest" class="bg-white">
-	<div class="container">
-		<div class="row justify-content-start">
-			<div class="col-12 mb-4">
-				<h3 class="h1">Attesting to a statement</h3>
-			</div>
-			<div class="col-12 col-md-6 col-lg-6 pr-lg-3">
-				<p>
-					Since you already claimed your DOTS before Polkadot went live, you only need to do this one step in order to finalise your claim.
-				</p>
-			</div>
-			<div class="col-12 col-md-6 col-lg-6 mb-4">
-
-			</div>
-		</div>
-	</div>
-	<span id="claim-guide"></span>
-	<span id="claim-guide-mycrypto"></span>
-</section>
-
-<section class="bg-dark pt-3 pt-md-3 pt-lg-0">
-	<div class="container pb-0">
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoToA jsActive active">polkadot.js</button>
-	</div>
-	<div class="slider sliderB text-white">
 		<div>
 			<div class="container">
 				{%- include slider_attest.html -%}
