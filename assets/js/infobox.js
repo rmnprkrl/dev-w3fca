@@ -49,13 +49,37 @@ async function hasClaimedOnPd(addr) {
   return false;
 }
 
-const noClaimText = () => {
-  document.getElementById('eth-address').innerHTML = 'No Claims for this address on Ethereum.';
-  document.getElementById('pd-address').innerHTML = 'No Claims for this address on Ethereum.';
-  document.getElementById('pubkey').innerHTML = 'No Claims for this address on Ethereum.';
-  document.getElementById('index').innerHTML = 'No Claims for this address on Ethereum.';
-  document.getElementById('balance').innerHTML = '0';
-  document.getElementById('vesting').innerHTML = 'No Claims for this address on Ethereum.';
+const noClaimText = async (pubkey) => {
+  addClassWaiting('claim-verify');
+
+  const addr = encodeAddress(pUtil.hexToU8a(pubkey), 0);
+
+  const api = await ApiPromise.create({
+    provider: new WsProvider("wss://rpc.polkadot.io"),
+  });
+
+  const attested = await hasClaimedOnPd(addr);
+
+  const ethAddr = await api.query.claims.preclaims(addr);
+  const claim = await api.query.claims.claims(ethAddr.toString());
+
+  let bal = attested
+    ? (await api.query.system.account(addr)).toJSON().data.free/10**12
+    : 0;
+
+  let vesting = attested
+    ? (await api.query.vesting.vesting(addr)).toJSON()
+    : null;
+
+  document.getElementById('eth-address').innerHTML = "There was no claim for this address on Ethereum.";
+  document.getElementById('pd-address').innerHTML = addr;
+  document.getElementById('pubkey').innerHTML = pubkey;
+  document.getElementById('index').innerHTML = "unknown";
+  document.getElementById('balance').innerHTML = bal.toString();
+  document.getElementById('vesting').innerHTML = vesting !== null ? vesting.locked/10**12 : "None";
+  document.getElementById('attested').innerHTML = attested ? "Yes" : "No"
+  removeClassWaiting('claim-verify');
+  addClassVerified('claim-verify');
 }
 
 const handleToggle = (box) => {
@@ -203,12 +227,10 @@ const check = async () => {
     return;
   }
 
-  let attested = false;
   if (value.length === 48 || value.length === 47) {
     try {
 			addClassWaiting('claim-verify');
       value = pUtil.u8aToHex(decodeAddress(value, 0));
-      attested = await hasClaimedOnPd(value);
     } catch (err) {
       console.log(err);
 			console.log('error decoding polkadot address', value);
@@ -217,16 +239,13 @@ const check = async () => {
     }
   }
 
-  if (attested) {
-    document.getElementById('attested').innerHTML = attested ? "Yes" : "No"
-  }
-
   const results = value.length === 42
     ? await getEthereumData(value, claims, frozenToken)
     : await getPolkadotData(value, claims, frozenToken);
 
   const { pdAddress, original, pubkey } = results;
 
+  let attested = false;
   if ((pdAddress.toLowerCase() !== 'none' && pdAddress.toLowerCase() !== 'not claimed')) {
     attested = await hasClaimedOnPd(pdAddress);
   } else if (pdAddress.toLowerCase("not claimed") && typeof original !== 'string') {
@@ -368,8 +387,7 @@ const getPolkadotData = async (pubkey, claims, frozenToken) => {
   try {
     claimsForPubkey = await claims.methods.claimsForPubkey(pubkey, 0).call();
   } catch (err) {
-    noClaimText();
-    removeClassWaiting('claim-verify');
+    noClaimText(pubkey);
   }
   let accumulated = await getEthereumData(claimsForPubkey, claims, frozenToken, true);
   let counter = 0;
