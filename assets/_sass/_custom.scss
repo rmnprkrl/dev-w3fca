@@ -55,6 +55,10 @@ section {
 	}
 }
 
+.btn-lg {
+	font-weight: 700 !important;
+}
+
 .btn-primary {
 	&:focus,
 	&:active {
@@ -111,6 +115,13 @@ section {
 	color: white;
 	opacity: 1;
 	cursor: not-allowed;
+}
+
+.btn-white {
+	&:active,
+	&:focus {
+		background: white !important;
+	}
 }
 
 p a,
