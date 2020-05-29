@@ -160,4 +160,8 @@ window.onload = function () {
 		slider.goTo(0);
 		sliderInnerPolkadotJsPlugin.goTo(10);
 	}
+
+	if (hash == 'statement-attest') {
+		sliderA.goTo(1);
+	}
 };
