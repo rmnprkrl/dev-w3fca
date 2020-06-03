@@ -14,7 +14,8 @@
 
 	#nested_inner_polkadot_js_plugin .tns-slide-active &,
 	#nested_inner_slider_polkadot_js .tns-slide-active &,
-	#nested_inner_mycrypto .tns-slide-active & {
+	#nested_inner_mycrypto .tns-slide-active &,
+	#nested_inner_attest .tns-slide-active & {
 		animation: pulsing-dot 1.5s ease-in-out infinite;
 	}
 
@@ -213,39 +214,88 @@
 		left: 16.5%;
 	}
 
-	#sA_4 & {
-		top: 51.9%;
-		left: 18.5%;
+	#sA_1_3 & {
+		top: 17.9%;
+		left: 52.5%;
 	}
 
-	#sA_5 & {
-		top: 28.9%;
-		left: 58.5%;
+	#sA_1_4 & {
+		top: 30.9%;
+		left: 52.5%;
 	}
 
-	#sA_6 & {
-		top: 81.6%;
-		left: 18.5%;
+	#sA_1_5 & {
+		top: 48.5%;
+		left: 12%;
 	}
 
-	#sA_7 & {
-		top: 33.4%;
-		left: 18.5%;
+	#sA_1_6 & {
+		top: 35.9%;
+		left: -0.5%;
 	}
 
-	#sA_8 & {
-		top: 46.6%;
-		left: 18.5%;
+	#sA_1_7 & {
+		top: 66.9%;
+		left: 52.5%;
 	}
 
-	#sA_10 & {
-		top: 50.6%;
-		left: 57.5%;
+	#sA_1_8 & {
+		top: 72.9%;
+		left: 19.5%;
 	}
 
-	#sA_11 & {
-		top: 81.4%;
-		left: 18.5%;
+	#sA_1_9 & {
+		top: 96.9%;
+		left: 44.5%;
+	}
+
+	#sA_1_10 & {
+		top: 22.5%;
+		left: 73.5%;
+	}
+
+	#sA_1_11 & {
+		top: 18.5%;
+		left: 81.5%;
+	}
+
+	#sA_1_12 & {
+		top: 38.9%;
+		left: 78.5%;
+	}
+
+	#sA_2_2 & {
+		display: none;
+	}
+
+	#sA_2_3 & {
+		top: 15.9%;
+		left: -0.5%;
+	}
+
+	#sA_2_4 & {
+		top: 26.9%;
+		left: 54.5%;
+	}
+
+	#sA_2_5 & {
+		top: 31.9%;
+		left: 54.5%;
+	}
+
+	#sA_2_6 & {
+		top: 55.9%;
+		left: 81.5%;
+	}
+
+	#sA_2_7 & {
+		top: 38.9%;
+		left: 78.5%;
+	}
+
+	#sA_2_8 & {
+		top: 38.9%;
+		left: 78.5%;
 	}
 }
 

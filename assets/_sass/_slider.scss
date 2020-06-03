@@ -134,6 +134,15 @@
 	}
 }
 
+.tns-item {
+	position: relative;
+	z-index: 0;
+}
+
+.tns-item.tns-slide-active {
+	z-index: 1;
+}
+
 .tns-slide-active > .slider-arrow-down {
 	display: block;
 }
