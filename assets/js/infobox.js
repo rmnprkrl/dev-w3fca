@@ -31,7 +31,7 @@ async function hasClaimedOnPd(addr) {
   console.log("being called with ", addr)
 
   const api = await ApiPromise.create({
-    provider: new WsProvider("wss://rpc.polkadot.io"),
+    provider: new WsProvider("wss://cc1-1.polkadot.network"),
   });
 
   let claim;
