@@ -11,6 +11,9 @@ const { ApiPromise, WsProvider } = require("@polkadot/api");
 
 setSS58Format(0);
 
+let lock = false;
+let cachedValue = '';
+
 const ClaimsArtifact = require('../contracts/Claims.json');
 const FrozenTokenArtifact = require('../contracts/FrozenToken.json');
 
@@ -30,8 +33,10 @@ const Config = {
 async function hasClaimedOnPd(addr) {
   console.log("being called with ", addr)
 
+  if (!addr) return;
+
   const api = await ApiPromise.create({
-    provider: new WsProvider("wss://cc1-1.polkadot.network"),
+    provider: new WsProvider("wss://rpc.polkadot.io"),
   });
 
   let claim;
@@ -43,10 +48,10 @@ async function hasClaimedOnPd(addr) {
   }
 
   if (Number(claim.toString()) !== 0) {
-    return true;
+    return false;
   }
 
-  return false;
+  return true;
 }
 
 const noClaimText = async (pubkey) => {
@@ -79,6 +84,7 @@ const noClaimText = async (pubkey) => {
   document.getElementById('attested').innerHTML = attested ? "Yes" : "No"
   removeClassWaiting('claim-verify');
   if (attested) addClassVerified('claim-verify');
+  lock = false;
 }
 
 const handleToggle = (box) => {
@@ -207,9 +213,22 @@ const validAddress = async () => {
 }
 
 const check = async () => {
+  if (lock) {
+    console.log("Locked, waiting for the return values from already sent requests.");
+    return;
+  }
+
   let { value } = document.getElementById('address-input');
+  if (cachedValue == value) {
+    console.log('cached value');
+    return;
+  }
+
+  removeClassWaiting('claim-verify');
+  removeClassVerified('claim-verify');
+
   if (value.length !== 42 && value.length !== 66 && value.length !== 48 && value.length !== 47) {
-    console.log('Wrong length input.');
+    // console.log('Wrong length input.');
     document.getElementById('eth-address').innerHTML = 'Unknown';
     document.getElementById('pd-address').innerHTML = 'None';
     document.getElementById('pubkey').innerHTML = 'None';
@@ -219,6 +238,9 @@ const check = async () => {
 		removeClassVerified('claim-verify');
     return;
   }
+
+  lock = true;
+  cachedValue = value;
 
   const { claims, frozenToken } = window;
   if (!frozenToken || !claims) {
@@ -233,7 +255,8 @@ const check = async () => {
     } catch (err) {
       console.log(err);
 			console.log('error decoding polkadot address', value);
-			removeClassWaiting('claim-verify');
+      removeClassWaiting('claim-verify');
+      lock = false;
       return;
     }
   }
@@ -253,10 +276,10 @@ const check = async () => {
 
   if (results.noBalance) {
 		console.log("This account does not have balance. Are you sure you're using the right address?");
-		removeClassWaiting('claim-verify');
+    removeClassWaiting('claim-verify');
+    lock = false;
     return;
   } else {
-    // console.log('results', results);
     document.getElementById('eth-address').innerHTML = results.original == 'None' ? 'None' : results.original.join(', ');
     document.getElementById('pd-address').innerHTML = (attested && pdAddress.toLowerCase() === "not claimed") ? "Claimed on Polkadot": pdAddress;
     document.getElementById('pubkey').innerHTML = (attested && pubkey.toLowerCase() === 'not claimed') ? "Claimed on Polkadot": pubkey;
@@ -265,7 +288,8 @@ const check = async () => {
     document.getElementById('vesting').innerHTML = results.vesting ? results.vesting/1000 + ' DOT' : 'None';
     document.getElementById('attested').innerHTML = attested ? "Yes" : "No"
 		removeClassWaiting('claim-verify');
-		addClassVerified('claim-verify');
+    addClassVerified('claim-verify');
+    lock = false;
   }
 }
 
@@ -334,8 +358,6 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
     }
   });
 
-  console.log('vLogs', vestedLogs);
-
   if (vestedLogs && vestedLogs.length) {
     ethData.vesting = vestedLogs[0].returnValues.amount;
   }
@@ -353,8 +375,7 @@ const getEthereumData = async (ethAddress, claims, frozenToken, ignoreAmendment)
   }
 
   const claimData = await claims.methods.claims(ethData.original[0]).call();
-  console.log('claimData', claimData);
-  console.log('ethDAta', ethData);
+
   const { index, pubKey } = claimData;
   if (pubKey == '0x0000000000000000000000000000000000000000000000000000000000000000') {
     ethData.index = 'None';
