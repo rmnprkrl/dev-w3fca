@@ -37,6 +37,23 @@ const sliderInnerPolkadotJs = tns({
 	autoHeight: false,
 });
 
+const sliderInnerCustody = tns({
+	container: '#nested_inner_slider_custody',
+	mode: 'gallery',
+	items: 1,
+	nested: 'inner',
+	slideBy: 'page',
+	speed: 400,
+	controls: true,
+	nav: true,
+	navPosition: 'bottom',
+	controlsPosition: 'bottom',
+	autoplay: false,
+	loop: false,
+	lazyload: true,
+	autoHeight: false,
+});
+
 const slider = tns({
 	container: '.slider',
 	mode: 'carousel',
