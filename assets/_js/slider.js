@@ -146,6 +146,11 @@ $(document).ready(function () {
 		let sliderIndex = $(this).data('slider') - 1;
 		sliderA.goTo(sliderIndex);
 	});
+
+	$('#js-custody-add-address-toggle').click(function () {
+		$('#js-custody-add-address').slideToggle();
+		event.preventDefault();
+	});
 });
 
 let hash = window.location.hash.replace('#', '');
