@@ -168,7 +168,7 @@ window.onload = function () {
 		slider.goTo(2);
 	}
 
-	if (hash == 'generate-polkadot-address-guide-custody') {
+	if (hash == 'generate-polkadot-address-guide-storage-provider') {
 		slider.goTo(3);
 	}
 
