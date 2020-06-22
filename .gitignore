@@ -31,3 +31,5 @@ doc/
 
 # NixOS
 default.nix
+
+CNAME
