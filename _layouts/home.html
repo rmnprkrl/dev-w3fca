@@ -54,6 +54,7 @@ layout: default
 		{%- include wallet.html -%}
 	</div>
 	<span id="generate-polkadot-address-guide"></span>
+	<span id="generate-polkadot-address-guide-parity-signer"></span>
 	<span id="generate-polkadot-address-guide-polkadot_js-plugin"></span>
 	<span id="generate-polkadot-address-guide-subkey"></span>
 	<span id="generate-polkadot-address-guide-polkadot_js"></span>
@@ -62,13 +63,18 @@ layout: default
 
 <section class="bg-dark pt-3 pt-md-3 pt-lg-0">
 	<div class="container pb-0">
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive active" data-slider="1">polkadot.js browser plugin</button>
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="2">subkey</button>
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="3">polkadot.js</button>
-		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="4">Storage Providers</button>
-		<button class="btn mt-lg-minus-3 mr-1 mr-lg-2 mb-2" disabled>Parity Signer</button>
+		<button data-slider="1" class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive active">Parity Signer</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="2">polkadot.js browser plugin</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="3">subkey</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="4">polkadot.js</button>
+		<button class="btn btn-primary btn-bg-dark mt-lg-minus-3 mr-1 mr-lg-2 mb-2 jsSliderGoTo jsActive" data-slider="5">Storage Providers</button>
 	</div>
 	<div class="slider text-white">
+		<div>
+			<div class="container">
+				{%- include slider_parity_signer.html -%}
+			</div>
+		</div>
 		<div>
 			<div class="container">
 				{%- include slider_polkadot_js_plugin.html -%}

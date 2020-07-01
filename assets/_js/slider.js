@@ -3,6 +3,23 @@
 
 import { tns } from 'tiny-slider/src/tiny-slider';
 
+const sliderInnerParitySigner = tns({
+	container: '#nested_inner_parity_signer',
+	mode: 'gallery',
+	items: 1,
+	nested: 'inner',
+	slideBy: 'page',
+	speed: 400,
+	controls: true,
+	nav: true,
+	navPosition: 'bottom',
+	controlsPosition: 'bottom',
+	autoplay: false,
+	loop: false,
+	lazyload: true,
+	autoHeight: false,
+});
+
 const sliderInnerPolkadotJsPlugin = tns({
 	container: '#nested_inner_polkadot_js_plugin',
 	mode: 'gallery',
@@ -156,20 +173,24 @@ $(document).ready(function () {
 let hash = window.location.hash.replace('#', '');
 
 window.onload = function () {
-	if (hash == 'generate-polkadot-address-guide-polkadot_js-plugin') {
+	if (hash == 'generate-polkadot-address-guide-parity-signer') {
 		slider.goTo(0);
 	}
 
-	if (hash == 'generate-polkadot-address-guide-subkey') {
+	if (hash == 'generate-polkadot-address-guide-polkadot_js-plugin') {
 		slider.goTo(1);
 	}
 
-	if (hash == 'generate-polkadot-address-guide-polkadot_js') {
+	if (hash == 'generate-polkadot-address-guide-subkey') {
 		slider.goTo(2);
 	}
 
-	if (hash == 'generate-polkadot-address-guide-custody') {
+	if (hash == 'generate-polkadot-address-guide-polkadot_js') {
 		slider.goTo(3);
+	}
+
+	if (hash == 'generate-polkadot-address-guide-custody') {
+		slider.goTo(4);
 	}
 
 	if (
@@ -179,11 +200,11 @@ window.onload = function () {
 		$.smoothScroll({
 			scrollTarget: '#generate-polkadot-address-guide',
 		});
-		slider.goTo(0);
+		slider.goTo(1);
 		sliderInnerPolkadotJsPlugin.goTo(10);
 	}
 
 	if (hash == 'statement-attest') {
-		sliderA.goTo(1);
+		sliderA.goTo(2);
 	}
 };
