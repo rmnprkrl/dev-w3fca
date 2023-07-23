@@ -59,7 +59,7 @@
     "gulp-newer": "^1.4.0",
     "gulp-plumber": "^1.2.0",
     "gulp-postcss": "^7.0.1",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
     "gulp-watch": "^5.0.0",
     "imagemin-pngquant": "^6.0.0",
     "natives": "^1.1.6",
@@ -81,6 +81,6 @@
     "jquery-smooth-scroll": "^2.2.0",
     "popper.js": "^1.16.1",
     "tiny-slider": "^2.9.2",
-    "web3": "1.2.4"
+    "web3": "4.0.3"
   }
 }
